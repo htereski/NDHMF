@@ -1,6 +1,7 @@
+name: NDHMF
 services:
-    laravel:
-        container_name: laravel-app
+    laravel.test:
+        container_name: laravel-NDHMF
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
@@ -26,6 +27,7 @@ services:
             - pgsql
             - redis
     pgsql:
+        container_name: pgsql-NDHMF
         image: 'postgres:17'
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
@@ -51,6 +53,7 @@ services:
             retries: 3
             timeout: 5s
     redis:
+        container_name: redis-NDHMF
         image: 'redis:alpine'
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
@@ -66,6 +69,7 @@ services:
             retries: 3
             timeout: 5s
     pgadmin:
+        container_name: pgadmin-NDHMF
         image: dpage/pgadmin4
         restart: always
         environment:
