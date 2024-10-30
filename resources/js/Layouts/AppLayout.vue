@@ -38,7 +38,7 @@ const logout = () => {
 
     <Banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100" id="inicio">
       <nav class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,8 +54,8 @@ const logout = () => {
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
                 <NavLink
-                  :href="route('index')"
-                  :active="route().current('index')"
+                  href="#inicio"
+                  :section="true"
                 >
                   Início
                 </NavLink>
@@ -306,8 +306,8 @@ const logout = () => {
             </template>
 
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              href="#inicio"
+              :section="true"
             >
               Início
             </ResponsiveNavLink>

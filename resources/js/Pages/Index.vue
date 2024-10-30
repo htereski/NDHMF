@@ -45,7 +45,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
       <div class="hero-overlay bg-white"></div>
       <div class="hero-content text-neutral-content text-center">
         <div class="max-w-6xl text-black">
-          <h1 class="mb-10 text-5xl font-semibold">Sobre</h1>
+          <h2 class="mb-10 text-5xl font-semibold">Sobre</h2>
 
           <p class="m-5 text-justify indent-12 text-xl font-light">
             A criação do Núcleo Marielle Franco remonta ao curso de Defensores
@@ -91,10 +91,32 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
             com o compromisso de fortalecer as ações comunitárias e educativas,
             mantendo vivo o legado de resistência e apoio às comunidades.
           </p>
+
+          <h2 class="pt-14 text-4xl font-semibold">Como funciona?</h2>
+          <div class="flex flex-col 2xl:flex-row w-full pt-5 h-max">
+            <div class="card grid flex-grow place-items-center h-max">
+              <p class="text-justify indent-12 text-xl font-light m-5">
+                Suas atividades são levadas às comunidades em resposta a uma
+                demanda local, caracterizada pelo recebimento de uma
+                carta/ofício pleiteando essas ações. Geralmente, esse pedido é
+                enviado por meio da representação de uma associação de
+                moradores.
+              </p>
+            </div>
+            <div class="divider divider-horizontal mx-10 bg-gray-400 w-[1px]"></div>
+            <div class="card grid flex-grow place-items-center h-max">
+              <p class="text-justify indent-12 text-xl font-light m-5">
+                A realização de mutirões de atendimento e palestras em
+                diferentes bairros e comunidades empoderou a classe do
+                município, possibilitando inclusão social. Os grupos atendidos
+                foram formados principalmente por mulheres com baixa
+                escolaridade e em situação de vulnerabilidade social.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
     <span
       v-if="showScrollButton"
       @click="scrollToTop"
