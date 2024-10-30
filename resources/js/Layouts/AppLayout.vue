@@ -61,7 +61,8 @@ const logout = () => {
                 </NavLink>
 
                 <NavLink
-                  href="#about"
+                  href="#sobre"
+                  :section="true"
                 >
                   Sobre
                 </NavLink>
