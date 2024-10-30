@@ -93,9 +93,9 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
           </p>
 
           <h2 class="pt-14 text-4xl font-semibold">Como funciona?</h2>
-          <div class="flex flex-col 2xl:flex-row w-full pt-5 h-max">
+          <div class="flex flex-col 2xl:flex-row w-full pt-10 h-max">
             <div class="card grid flex-grow place-items-center h-max">
-              <p class="text-justify indent-12 text-xl font-light m-5">
+              <p class="text-justify indent-12 text-xl font-light mx-5">
                 Suas atividades são levadas às comunidades em resposta a uma
                 demanda local, caracterizada pelo recebimento de uma
                 carta/ofício pleiteando essas ações. Geralmente, esse pedido é
@@ -103,9 +103,15 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
                 moradores.
               </p>
             </div>
-            <div class="divider divider-horizontal mx-10 bg-gray-400 w-[1px]"></div>
-            <div class="card grid flex-grow place-items-center h-max">
-              <p class="text-justify indent-12 text-xl font-light m-5">
+
+            <div
+              class="divider divider-horizontal mx-10 bg-gray-400 w-[1px] pb-10 hidden 2xl:block"
+            ></div>
+
+            <div
+              class="card grid flex-grow place-items-center h-max pt-10 2xl:pt-0"
+            >
+              <p class="text-justify indent-12 text-xl font-light mx-5">
                 A realização de mutirões de atendimento e palestras em
                 diferentes bairros e comunidades empoderou a classe do
                 município, possibilitando inclusão social. Os grupos atendidos
@@ -117,6 +123,38 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
         </div>
       </div>
     </div>
+
+    <div
+      class="w-full bg-red-900 min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-center"
+    >
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
+        <h3 class="text-white text-3xl text-center pb-5">Objetivo</h3>
+        <p class="text-white text-xl text-center">
+          O NDH orienta permanentemente pessoas e coletivos em situações de
+          violação dos direitos humanos e oferece condições para orientação
+          jurídica à população.
+        </p>
+      </div>
+
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
+        <h3 class="text-white text-3xl text-center pb-5">Parcerias</h3>
+        <p class="text-white text-xl text-center">
+          Contamos com o apoio da Defensoria Pública da União, Defensoria do
+          Estado do Paraná, e realizamos mutirões, palestras e oficinas com a
+          comunidade.
+        </p>
+      </div>
+
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
+        <h3 class="text-white text-3xl text-center pb-5">Funcionamento</h3>
+        <p class="text-white text-xl text-center">
+          Respondemos às demandas das comunidades de Paranaguá, muitas vezes por
+          meio de solicitações de associações de moradores, levando apoio
+          jurídico e social às regiões mais necessitadas.
+        </p>
+      </div>
+    </div>
+
     <span
       v-if="showScrollButton"
       @click="scrollToTop"
