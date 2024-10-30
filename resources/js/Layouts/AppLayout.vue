@@ -313,8 +313,8 @@ const logout = () => {
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              href="#sobre"
+              :section="true"
             >
               Sobre
             </ResponsiveNavLink>

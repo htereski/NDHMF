@@ -22,7 +22,9 @@ const classes = computed(() => {
     </Link>
   </template>
 
-  <template v-if="section">
-    <a :href="href" :class="classes"><slot /></a>
+  <template v-else>
+    <a :href="href" :class="classes">
+      <slot />
+    </a>
   </template>
 </template>
