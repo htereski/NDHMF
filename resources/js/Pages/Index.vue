@@ -41,7 +41,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
       </p>
     </div>
 
-    <div class="hero min-h-screen" id="sobre">
+    <div class="hero min-h-5/6 pb-20 bg-white" id="sobre">
       <div class="hero-overlay bg-white"></div>
       <div class="hero-content text-neutral-content text-center">
         <div class="max-w-6xl text-black">
@@ -92,7 +92,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
             mantendo vivo o legado de resistência e apoio às comunidades.
           </p>
 
-          <h2 class="pt-14 text-4xl font-semibold">Como funciona?</h2>
+          <h2 class="pt-[50px] text-4xl font-semibold">Como funciona?</h2>
           <div class="flex flex-col 2xl:flex-row w-full pt-10 h-max">
             <div class="card grid flex-grow place-items-center h-max">
               <p class="text-justify indent-12 text-xl font-light mx-5">
@@ -125,33 +125,45 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
     </div>
 
     <div
-      class="w-full bg-red-900 min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-center"
+      class="w-full bg-red-900 min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-start"
     >
-      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
-        <h3 class="text-white text-3xl text-center pb-5">Objetivo</h3>
-        <p class="text-white text-xl text-center">
-          O NDH orienta permanentemente pessoas e coletivos em situações de
-          violação dos direitos humanos e oferece condições para orientação
-          jurídica à população.
-        </p>
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
+        <div class="flex flex-col items-center">
+          <h3 class="text-white text-3xl text-center pb-5">Objetivo</h3>
+          <p
+            class="text-white text-xl text-center flex-grow flex items-center justify-center"
+          >
+            O NDH orienta permanentemente pessoas e coletivos em situações de
+            violação dos direitos humanos e oferece condições para orientação
+            jurídica à população.
+          </p>
+        </div>
       </div>
 
-      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
-        <h3 class="text-white text-3xl text-center pb-5">Parcerias</h3>
-        <p class="text-white text-xl text-center">
-          Contamos com o apoio da Defensoria Pública da União, Defensoria do
-          Estado do Paraná, e realizamos mutirões, palestras e oficinas com a
-          comunidade.
-        </p>
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
+        <div class="flex flex-col items-center">
+          <h3 class="text-white text-3xl text-center pb-5">Parcerias</h3>
+          <p
+            class="text-white text-xl text-center flex-grow flex items-center justify-center"
+          >
+            Contamos com o apoio da Defensoria Pública da União, Defensoria do
+            Estado do Paraná, e realizamos mutirões, palestras e oficinas com a
+            comunidade.
+          </p>
+        </div>
       </div>
 
-      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5">
-        <h3 class="text-white text-3xl text-center pb-5">Funcionamento</h3>
-        <p class="text-white text-xl text-center">
-          Respondemos às demandas das comunidades de Paranaguá, muitas vezes por
-          meio de solicitações de associações de moradores, levando apoio
-          jurídico e social às regiões mais necessitadas.
-        </p>
+      <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
+        <div class="flex flex-col items-center">
+          <h3 class="text-white text-3xl text-center pb-5">Funcionamento</h3>
+          <p
+            class="text-white text-xl text-center flex-grow flex items-center justify-center"
+          >
+            Respondemos às demandas das comunidades de Paranaguá, muitas vezes
+            por meio de solicitações de associações de moradores, levando apoio
+            jurídico e social às regiões mais necessitadas.
+          </p>
+        </div>
       </div>
     </div>
 
