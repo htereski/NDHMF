@@ -68,8 +68,8 @@ const logout = () => {
                 </NavLink>
 
                 <NavLink
-                  :href="route('index')"
-                  :active="route().current('dashboard')"
+                  href="#acoes"
+                  :section="true"
                 >
                   Ações
                 </NavLink>
@@ -318,10 +318,10 @@ const logout = () => {
             >
               Sobre
             </ResponsiveNavLink>
-
+            
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              href="#acoes"
+              :section="true"
             >
               Ações
             </ResponsiveNavLink>
