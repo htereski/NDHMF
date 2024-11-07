@@ -1,10 +1,14 @@
 <script setup>
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Quiz from "@/Components/Quiz.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 defineProps({
   user: Boolean,
 });
+
+const showQuiz = ref(false);
 
 const showScrollButton = ref(false);
 
@@ -281,6 +285,15 @@ onBeforeUnmount(() => window.removeEventListener("scroll", handleScroll));
           <hr />
         </li>
       </ul>
+    </section>
+
+    <section
+      class="w-full flex flex-col items-center justify-center gap-10 py-10"
+    >
+      <PrimaryButton @click="showQuiz = !showQuiz">
+        Fazer teste de violentômetro
+      </PrimaryButton>
+      <Quiz v-if="showQuiz"></Quiz>
     </section>
 
     <span
