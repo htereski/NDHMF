@@ -1,5 +1,8 @@
 <?php
 
+use App\Events\NewChatMessage;
+use App\Models\Message;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,4 +29,33 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/chats', function () {
+
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        $chats = $user->chats()
+            ->with('messages.user')
+            ->get();
+
+        return Inertia::render('Chat/ShowChats', [
+            'chats' => $chats
+        ]);
+    })->name('chats');
+
+    Route::post('/send/message', function (Request $request) {
+
+        $request->validate([
+            'chat_id' => ['required', 'exists:chats,id'],
+            'content' => ['required', 'max:255'],
+        ]);
+
+        $message = new Message();
+        $message->chat_id = $request->chat_id;
+        $message->content = $request->content;
+        
+        event(new NewChatMessage($message));
+
+    })->name('send.message');
 });

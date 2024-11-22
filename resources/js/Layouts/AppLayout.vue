@@ -82,8 +82,7 @@ const logout = () => {
                 </NavLink>
 
                 <NavLink
-                  :href="route('index')"
-                  :active="route().current('dashboard')"
+                  :href="route('chats')"
                 >
                   Chamados
                 </NavLink>
