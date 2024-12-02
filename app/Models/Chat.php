@@ -11,11 +11,6 @@ class Chat extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'subject',
-        'status'
-    ];
-
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'victim_has_chats', 'chat_id', 'victim_id');

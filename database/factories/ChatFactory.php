@@ -10,16 +10,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ChatFactory extends Factory
 {
 
-    private array $status = [
-        'ATIVO',
-        'FECHADO'
-    ];
-
     public function definition(): array
     {
         return [
-            'subject' => $this->faker->city(),
-            'status' => $this->faker->randomElement($this->status),
+          
         ];
     }
 }

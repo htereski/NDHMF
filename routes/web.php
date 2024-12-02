@@ -1,25 +1,12 @@
 <?php
 
-use App\Events\NewChatMessage;
-use App\Models\Message;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HomeController;
+use App\Http\Middleware\OrganizationMemberOnly;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    $user = Auth::user();
-
-    if (isset($user)) {
-        $user = true;
-    } else {
-        $user = false;
-    }
-
-    return Inertia::render('Index', [
-        'user' => $user,
-    ]);
-})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::middleware([
     'auth:sanctum',
@@ -30,32 +17,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/chats', function () {
+    Route::get('/chats', [ChatController::class, 'index'])->middleware(OrganizationMemberOnly::class)->name('chats');
 
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
-
-        $chats = $user->chats()
-            ->with('messages.user')
-            ->get();
-
-        return Inertia::render('Chat/ShowChats', [
-            'chats' => $chats
-        ]);
-    })->name('chats');
-
-    Route::post('/send/message', function (Request $request) {
-
-        $request->validate([
-            'chat_id' => ['required', 'exists:chats,id'],
-            'content' => ['required', 'max:255'],
-        ]);
-
-        $message = new Message();
-        $message->chat_id = $request->chat_id;
-        $message->content = $request->content;
-        
-        event(new NewChatMessage($message));
-
-    })->name('send.message');
+    Route::post('/send/message', [ChatController::class, 'send'])->name('send.message');
 });

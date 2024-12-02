@@ -10,7 +10,8 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 
 defineProps({
   title: String,
-  user: Boolean,
+  loggedIn: Boolean,
+  user: Object,
 });
 
 const showingNavigationDropdown = ref(false);
@@ -81,14 +82,14 @@ const logout = () => {
                   Postagens
                 </NavLink>
 
-                <NavLink
+                <NavLink v-if="user && user.role.name != 'vitima'"
                   :href="route('chats')"
                 >
                   Chamados
                 </NavLink>
               </div>
 
-              <template v-if="!user">
+              <template v-if="!loggedIn">
                 <div class="hidden space-x-8 sm:-my-px lg:ms-80 lg:flex">
                   <NavLink
                     :href="route('login')"
@@ -107,11 +108,11 @@ const logout = () => {
               </template>
             </div>
 
-            <template v-if="user">
+            <template v-if="loggedIn">
               <div
                 class="hidden lg:items-center space-x-8 sm:-my-px lg:ms-80 lg:flex"
               >
-                <template v-if="user">
+                <template v-if="loggedIn">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -175,9 +176,9 @@ const logout = () => {
               </div>
             </template>
 
-            <template v-if="!user">
+            <template v-if="!loggedIn">
               <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <template v-if="user">
+                <template v-if="loggedIn">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -287,7 +288,7 @@ const logout = () => {
           class="lg:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
-            <template v-if="!user">
+            <template v-if="!loggedIn">
               <ResponsiveNavLink
                 :href="route('login')"
                 :active="route().current('dashboard')"
@@ -342,7 +343,7 @@ const logout = () => {
 
           <!-- Responsive Settings Options -->
 
-          <template v-if="user">
+          <template v-if="loggedIn">
             <div class="pt-4 pb-1 border-t border-gray-200">
               <div class="flex items-center px-4">
                 <div

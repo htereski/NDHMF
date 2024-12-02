@@ -5,6 +5,7 @@ import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   chats: Array,
+  user: Object
 });
 
 const openChatIds = ref([]);
@@ -67,7 +68,7 @@ watch(currentChat, (newChatId) => {
 </script>
 
 <template>
-  <AppLayout title="Chamados" :user="true">
+  <AppLayout title="Chamados" :loggedIn="true" :user="user">
     <div class="p-6 bg-gray-100 min-h-screen">
       <h1 class="text-2xl font-bold text-gray-700 mb-6">Meus Chamados</h1>
 
@@ -80,32 +81,32 @@ watch(currentChat, (newChatId) => {
           class="p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
           <div @click="toggleChat(chat.id)" class="cursor-pointer">
             <h2 class="text-lg font-semibold text-gray-800">
-              {{ chat.subject }}
+              #{{ chat.id }}
             </h2>
-            <p class="text-sm text-gray-600">
-              Status:
-              <span :class="chat.status === 'ATIVO' ? 'text-green-500' : 'text-red-500'">
-                {{ chat.status === 'ATIVO' ? 'Ativo' : 'Fechado' }}
-              </span>
-            </p>
           </div>
 
           <div v-if="openChatIds.includes(chat.id)" class="mt-4">
-            <div v-for="message in (chatMessages[chat.id] || [])" :key="message.id"
-              class="mb-2 p-2 bg-gray-50 rounded-lg border border-gray-200">
-              <p class="text-sm text-gray-800">
-                <strong>{{ message.user.name }}:</strong> {{ message.content }}
-              </p>
+            <div v-for="message in (chatMessages[chat.id] || [])" :key="message.id" class="mb-4">
+              <div v-if="message.user.id == user.id" class="flex justify-end">
+                <div class="bg-green-100 text-green-900 p-3 rounded-lg shadow-md max-w-xs">
+                  <strong>Você</strong>
+                  <p class="mt-1">{{ message.content }}</p>
+                </div>
+              </div>
+              <div v-else class="flex justify-start">
+                <div class="bg-slate-200 text-slate-800 p-3 rounded-lg shadow-md max-w-xs">
+                  <strong>{{ message.user.name }}</strong>
+                  <p class="mt-1">{{ message.content }}</p>
+                </div>
+              </div>
             </div>
 
-            <form @submit.prevent="sendMessage">
-              <div v-if="chat.status === 'ATIVO'" class="mt-4">
-                <input v-model="inputMessages[chat.id]" type="text" placeholder="Digite sua mensagem..."
-                  class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                  Enviar
-                </button>
-              </div>
+            <form @submit.prevent="sendMessage" class="flex gap-2">
+              <input v-model="inputMessages[chat.id]" type="text" placeholder="Digite sua mensagem..."
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <button class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition">
+                Enviar
+              </button>
             </form>
           </div>
         </div>

@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
-            $table->enum('status', ['ATIVO', 'FECHADO']);
             $table->timestamps();
         });
     }

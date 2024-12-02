@@ -22,8 +22,15 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
         ]);
 
-        User::factory(5)->create();
-        Chat::factory(10)->create();
-        Message::factory(20)->create();
+        $users = User::factory(5)->create();
+        // $chats = Chat::factory(10)->create();
+        // Message::factory(20)->create();
+
+        // $users->each(function($user) use ($chats) {
+        //     $user->chats()->attach(
+        //         $chats->random(2)->pluck('id')->toArray()
+        //     );
+        // });
+        
     }
 }
