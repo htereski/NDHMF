@@ -4,22 +4,20 @@ namespace App\Services;
 
 use App\Models\Chat;
 use App\Models\User;
-use App\Utils\AuthUtils;
-use Inertia\Inertia;
-use Inertia\Response;
+use App\Helper\UserHelper;
 
 class HomeService
 {
-    public function principal(): Response
+    public function principal(): array
     {
-        $user = AuthUtils::loggedUser();
-        $loggedIn = false;
+        $user = UserHelper::authenticated();
+        $isAuthenticated = false;
         $chat = null;
 
-        if ($user) {
-            $user->load(['role', 'chats.messages.user']);
+        if (isset($user)) {
+            $user->load(['chats.messages.user']);
 
-            if ($user->role && $user->role->name == 'vitima') {
+            if ($user->role->name == 'vitima') {
                 $chat = $user->chats->first();
 
                 $usersMembers = User::whereHas('role', function ($query) {
@@ -31,14 +29,10 @@ class HomeService
                 }
             }
 
-            $loggedIn = true;
+            $isAuthenticated = true;
         }
 
-        return Inertia::render('Index', [
-            'loggedIn' => $loggedIn,
-            'chat' => $chat,
-            'user' => $user,
-        ]);
+        return array('isAuthenticated' => $isAuthenticated, 'chat' => $chat, 'user' => $user);
     }
 
     private function createChatForUser(User $user, $usersMembers)

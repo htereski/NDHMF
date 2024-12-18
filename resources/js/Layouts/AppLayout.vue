@@ -1,36 +1,36 @@
 <script setup>
-import { ref } from "vue";
-import { Head, Link, router } from "@inertiajs/vue3";
-import ApplicationMark from "@/Components/ApplicationMark.vue";
-import Banner from "@/Components/Banner.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import { ref } from 'vue'
+import { Head, Link, router } from '@inertiajs/vue3'
+import ApplicationMark from '@/Components/ApplicationMark.vue'
+import Banner from '@/Components/Banner.vue'
+import Dropdown from '@/Components/Dropdown.vue'
+import DropdownLink from '@/Components/DropdownLink.vue'
+import NavLink from '@/Components/NavLink.vue'
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 
 defineProps({
   title: String,
-  loggedIn: Boolean,
+  isAuthenticated: Boolean,
   user: Object,
-});
+})
 
-const showingNavigationDropdown = ref(false);
+const showingNavigationDropdown = ref(false)
 
-const switchToTeam = (team) => {
+const switchToTeam = team => {
   router.put(
-    route("current-team.update"),
+    route('current-team.update'),
     {
       team_id: team.id,
     },
     {
       preserveState: false,
     }
-  );
-};
+  )
+}
 
 const logout = () => {
-  router.post(route("logout"));
-};
+  router.post(route('logout'))
+}
 </script>
 
 <template>
@@ -54,42 +54,23 @@ const logout = () => {
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
-                <NavLink
-                  href="#inicio"
-                  :section="true"
-                >
-                  Início
-                </NavLink>
+                <NavLink href="#inicio" :section="true"> Início </NavLink>
+
+                <NavLink href="#sobre" :section="true"> Sobre </NavLink>
+
+                <NavLink href="#acoes" :section="true"> Ações </NavLink>
+
+                <NavLink :href="route('post.index')"> Postagens </NavLink>
 
                 <NavLink
-                  href="#sobre"
-                  :section="true"
-                >
-                  Sobre
-                </NavLink>
-
-                <NavLink
-                  href="#acoes"
-                  :section="true"
-                >
-                  Ações
-                </NavLink>
-
-                <NavLink
-                  :href="route('index')"
-                  :active="route().current('dashboard')"
-                >
-                  Postagens
-                </NavLink>
-
-                <NavLink v-if="user && user.role.name != 'vitima'"
+                  v-if="user && user.role.name != 'vitima'"
                   :href="route('chats')"
                 >
                   Chamados
                 </NavLink>
               </div>
 
-              <template v-if="!loggedIn">
+              <template v-if="!isAuthenticated">
                 <div class="hidden space-x-8 sm:-my-px lg:ms-80 lg:flex">
                   <NavLink
                     :href="route('login')"
@@ -108,11 +89,11 @@ const logout = () => {
               </template>
             </div>
 
-            <template v-if="loggedIn">
+            <template v-if="isAuthenticated">
               <div
                 class="hidden lg:items-center space-x-8 sm:-my-px lg:ms-80 lg:flex"
               >
-                <template v-if="loggedIn">
+                <template v-if="isAuthenticated">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -176,9 +157,9 @@ const logout = () => {
               </div>
             </template>
 
-            <template v-if="!loggedIn">
+            <template v-if="!isAuthenticated">
               <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <template v-if="loggedIn">
+                <template v-if="isAuthenticated">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -288,7 +269,7 @@ const logout = () => {
           class="lg:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
-            <template v-if="!loggedIn">
+            <template v-if="!isAuthenticated">
               <ResponsiveNavLink
                 :href="route('login')"
                 :active="route().current('dashboard')"
@@ -305,30 +286,20 @@ const logout = () => {
               <hr />
             </template>
 
-            <ResponsiveNavLink
-              href="#inicio"
-              :section="true"
-            >
+            <ResponsiveNavLink href="#inicio" :section="true">
               Início
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink
-              href="#sobre"
-              :section="true"
-            >
+            <ResponsiveNavLink href="#sobre" :section="true">
               Sobre
             </ResponsiveNavLink>
-            
-            <ResponsiveNavLink
-              href="#acoes"
-              :section="true"
-            >
+
+            <ResponsiveNavLink href="#acoes" :section="true">
               Ações
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              :href="route('post.index')"
             >
               Postagens
             </ResponsiveNavLink>
@@ -343,7 +314,7 @@ const logout = () => {
 
           <!-- Responsive Settings Options -->
 
-          <template v-if="loggedIn">
+          <template v-if="isAuthenticated">
             <div class="pt-4 pb-1 border-t border-gray-200">
               <div class="flex items-center px-4">
                 <div

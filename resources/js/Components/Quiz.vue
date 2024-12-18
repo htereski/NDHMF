@@ -1,87 +1,87 @@
 <script setup>
-import { ref, computed, watch } from "vue";
-import PrimaryButton from "./PrimaryButton.vue";
+import { ref, computed, watch } from 'vue'
+import PrimaryButton from './PrimaryButton.vue'
 
 const questionsGroup1 = ref([
-  "Piadas ofensivas",
-  "Chantagear",
-  "Mentir / Enganar",
-  "Ignorar / Dar um gelo",
-  "Ciumar",
-  "Culpar",
-  "Desqualificar",
-  "Ridicularizar / Ofender",
-  "Humilhar em público",
-  "Intimidar / Ameaçar",
-]);
+  'Piadas ofensivas',
+  'Chantagear',
+  'Mentir / Enganar',
+  'Ignorar / Dar um gelo',
+  'Ciumar',
+  'Culpar',
+  'Desqualificar',
+  'Ridicularizar / Ofender',
+  'Humilhar em público',
+  'Intimidar / Ameaçar',
+])
 
 const questionsGroup2 = ref([
-  "Controlar / Proibir",
-  "Destruir bens pessoais",
-  "Machucar",
-  "Tapinhas / Pancadinhas",
-  "Brincar de bater",
-  "Beliscar / Arranhar",
-  "Empurrar",
-  "Dar tapas",
-]);
+  'Controlar / Proibir',
+  'Destruir bens pessoais',
+  'Machucar',
+  'Tapinhas / Pancadinhas',
+  'Brincar de bater',
+  'Beliscar / Arranhar',
+  'Empurrar',
+  'Dar tapas',
+])
 
 const questionsGroup3 = ref([
-  "Chutar",
-  "Confinar / Prender",
-  "Ameaçar com objetos",
-  "Ameaçar com armas",
-  "Ameaçar de morte",
-  "Forçar uma relação sexual",
-  "Abuso sexual",
-  "Violentar",
-  "Mutilar",
-]);
+  'Chutar',
+  'Confinar / Prender',
+  'Ameaçar com objetos',
+  'Ameaçar com armas',
+  'Ameaçar de morte',
+  'Forçar uma relação sexual',
+  'Abuso sexual',
+  'Violentar',
+  'Mutilar',
+])
 
 const answers = ref([
-  "Tome cuidado a violência tende a aumentar",
-  "Reaja! Não se destrua",
-  "Peça ajuda a um profissional",
-]);
+  'Tome cuidado a violência tende a aumentar',
+  'Reaja! Não se destrua',
+  'Peça ajuda a um profissional',
+])
 
-const selectedQuestions = ref([]);
-const showAnswer = ref(false);
-const result = ref("");
+const selectedQuestions = ref([])
+const showAnswer = ref(false)
+const result = ref('')
 
 const combinedQuestions = computed(() => {
   return [
     ...questionsGroup1.value,
     ...questionsGroup2.value,
     ...questionsGroup3.value,
-  ];
-});
+  ]
+})
 
-watch(selectedQuestions, (question) => {
+watch(selectedQuestions, question => {
   if (question.length === 0) {
-    result.value = "";
-    showAnswer.value = false;
+    result.value = ''
+    showAnswer.value = false
   }
-});
+})
 
 function giveAnswer() {
-  showAnswer.value = true;
-  result.value = "";
+  showAnswer.value = true
+  result.value = ''
 
   if (selectedQuestions.value.length === 0) {
-    result.value = "Nenhuma opção selecionada.";
-    return;
+    result.value = 'Nenhuma opção selecionada.'
+    return
   }
 
-  if (selectedQuestions.value.some((q) => questionsGroup3.value.includes(q))) {
-    result.value = answers.value[2];
+  if (selectedQuestions.value.some(q => questionsGroup3.value.includes(q))) {
+    result.value = answers.value[2]
   } else if (
-    selectedQuestions.value.some((q) => questionsGroup2.value.includes(q))
+    selectedQuestions.value.some(q => questionsGroup2.value.includes(q))
   ) {
-    result.value = answers.value[1];
+    result.value = answers.value[1]
   } else if (
-    selectedQuestions.value.some((q) => questionsGroup1.value.includes(q))
+    selectedQuestions.value.some(q => questionsGroup1.value.includes(q))
   ) {
-    result.value = answers.value[0];
+    result.value = answers.value[0]
   }
 }
 </script>

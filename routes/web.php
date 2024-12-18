@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Middleware\OrganizationMemberOnly;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,7 +18,17 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/chats', [ChatController::class, 'index'])->middleware(OrganizationMemberOnly::class)->name('chats');
+    Route::middleware(OrganizationMemberOnly::class)->group(function () {
+        Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+        Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+        Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
+        Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
+        Route::post('/post', [PostController::class, 'store'])->name('post.store');
+        Route::delete('/post/destroy/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+    });
 
     Route::post('/send/message', [ChatController::class, 'send'])->name('send.message');
 });
+
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/post', [PostController::class, 'index'])->name('post.index');

@@ -18,6 +18,21 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            typography: ({ theme }) => ({
+                DEFAULT: {
+                    css: {
+                        p: {
+                            margin: 0,
+                        },
+                        li: {
+                            margin: 5,
+                            p: {
+                                margin: 0,
+                            },
+                        },
+                    },
+                },
+            }),
         },
     },
 
