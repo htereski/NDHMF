@@ -40,9 +40,21 @@ function deletePost() {
         <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">
           {{ post.titulo }}
         </h2>
+
+        <span>Criado:</span>
         <p class="prose-md">
           {{ formatDate(post.created_at) }} por {{ post.user.name }}
         </p>
+
+        <template v-if="post.editors && post.editors.length > 0">
+          <span class="mt-3 flex">Edições:</span>
+          <template v-for="editors in post.editors" :key="editors.id">
+            <p class="prose-md">
+              {{ formatDate(editors.pivot.created_at) }} por {{ editors.name }}
+            </p>
+          </template>
+        </template>
+
         <div
           class="my-8 prose-lg text-justify text-black w-full m-0 p-0"
           v-html="post.texto"

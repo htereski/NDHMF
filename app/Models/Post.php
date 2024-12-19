@@ -21,4 +21,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function editors()
+    {
+        return $this->belongsToMany(User::class, 'post_edits')
+            ->withTimestamps();
+    }
 }

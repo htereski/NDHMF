@@ -3,7 +3,13 @@ export default function formatDate(dateString) {
     return ''
   }
   const date = new Date(dateString)
-  const options = { day: '2-digit', month: 'long', year: 'numeric' }
+  const options = {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }
 
   return new Intl.DateTimeFormat('pt-BR', options).format(date)
 }

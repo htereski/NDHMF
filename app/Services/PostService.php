@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
 use App\Helper\UserHelper;
+use App\Models\PostEdit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class PostService
@@ -26,7 +28,8 @@ class PostService
         $user = UserHelper::authenticated();
 
         $post->load('user');
-        $post->imagem = asset($post->imagem); 
+        $post->load('editors');
+        $post->imagem = asset($post->imagem);
 
         return array('user' => $user, 'post' => $post);
     }
@@ -100,6 +103,12 @@ class PostService
         $post->texto = $request->texto;
         $post->save();
 
+        PostEdit::create([
+            'post_id' => $post->id,
+            'user_id' => Auth::id(),
+        ]);
+        
+        $post->load('editors');
         $post->load('user');
         $post->imagem = asset($post->imagem);
 
