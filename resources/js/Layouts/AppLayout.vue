@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import NavLink from '@/Components/NavLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import { buildFullUrl } from '@/Utils/Url'
 
 defineProps({
   title: String,
@@ -54,11 +55,17 @@ const logout = () => {
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
-                <NavLink href="#inicio" :section="true"> Início </NavLink>
+                <NavLink :href="buildFullUrl('#inicio')" :section="true">
+                  Início
+                </NavLink>
 
-                <NavLink href="#sobre" :section="true"> Sobre </NavLink>
+                <NavLink :href="buildFullUrl('#sobre')" :section="true">
+                  Sobre
+                </NavLink>
 
-                <NavLink href="#acoes" :section="true"> Ações </NavLink>
+                <NavLink :href="buildFullUrl('#acoes')" :section="true">
+                  Ações
+                </NavLink>
 
                 <NavLink :href="route('post.index')"> Postagens </NavLink>
 
@@ -286,27 +293,25 @@ const logout = () => {
               <hr />
             </template>
 
-            <ResponsiveNavLink href="#inicio" :section="true">
+            <ResponsiveNavLink :href="buildFullUrl('#incio')" :section="true">
               Início
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink href="#sobre" :section="true">
+            <ResponsiveNavLink :href="buildFullUrl('#sobre')" :section="true">
               Sobre
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink href="#acoes" :section="true">
+            <ResponsiveNavLink :href="buildFullUrl('#acoes')" :section="true">
               Ações
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink
-              :href="route('post.index')"
-            >
+            <ResponsiveNavLink :href="route('post.index')">
               Postagens
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              v-if="user && user.role.name != 'vitima'"
+              :href="route('chats')"
             >
               Chamados
             </ResponsiveNavLink>
