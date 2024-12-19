@@ -10,11 +10,12 @@ import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfile
 defineProps({
   confirmsTwoFactorAuthentication: Boolean,
   sessions: Array,
+  isAuthenticated: Boolean,
 })
 </script>
 
 <template>
-  <Layout title="Profile">
+  <Layout title="Profile" :isAuthenticated="isAuthenticated">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
     </template>

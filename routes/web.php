@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CustomUserProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\OrganizationMemberOnly;
@@ -17,6 +18,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/user/profile', [CustomUserProfileController::class, 'show'])
+        ->name('profile.show');
 
     Route::middleware(OrganizationMemberOnly::class)->group(function () {
         Route::get('/chats', [ChatController::class, 'index'])->name('chats');
