@@ -14,7 +14,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', handleScroll))
   <span
     v-if="showScrollButton"
     @click="scrollToTop"
-    class="fixed bottom-[30px] right-[30px] cursor-pointer p-[10px] bg-black rounded-full text-white shadow-lg"
+    class="fixed bottom-[70px] right-[30px] cursor-pointer p-[10px] bg-black rounded-full text-white shadow-lg"
   >
     <svg
       class="w-6 h-6 text-white"

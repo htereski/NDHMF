@@ -75,7 +75,7 @@ const toggleChat = () => {
 
 <template>
   <div
-    class="fixed bottom-0 right-0 w-full md:w-1/3 lg:w-1/4 bg-white shadow-lg border border-gray-300 rounded-t-lg"
+    class="fixed bottom-0 right-0 w-full md:w-1/3 lg:w-1/4 bg-white shadow-lg border border-gray-300 rounded-t-lg z-50"
   >
     <div
       class="bg-blue-500 text-white p-3 flex justify-between items-center cursor-pointer"
