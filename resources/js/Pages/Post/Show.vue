@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue'
+import Layout from '@/Layouts/Layout.vue'
 import formatDate from '@/Utils/FormatDate.js'
 import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
@@ -19,7 +19,7 @@ function deletePost() {
 </script>
 
 <template>
-  <AppLayout
+  <Layout
     title="Núcleo de Direitos Humanos Marielle Franco - Postagens"
     :isAuthenticated="user"
     :user="user"
@@ -74,5 +74,5 @@ function deletePost() {
         </button>
       </div>
     </div>
-  </AppLayout>
+  </Layout>
 </template>

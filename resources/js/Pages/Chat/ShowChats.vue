@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import AppLayout from '@/Layouts/AppLayout.vue'
+import Layout from '@/Layouts/Layout.vue'
 import { useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -67,7 +67,7 @@ watch(currentChat, newChatId => {
 </script>
 
 <template>
-  <AppLayout title="Chamados" :isAuthenticated="true" :user="user">
+  <Layout title="Chamados" :isAuthenticated="true" :user="user">
     <div class="p-6 bg-gray-100 min-h-screen">
       <h1 class="text-2xl font-bold text-gray-700 mb-6">Meus Chamados</h1>
 
@@ -126,5 +126,5 @@ watch(currentChat, newChatId => {
         </div>
       </div>
     </div>
-  </AppLayout>
+  </Layout>
 </template>

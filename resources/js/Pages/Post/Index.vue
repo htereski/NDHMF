@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue'
+import Layout from '@/Layouts/Layout.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Link } from '@inertiajs/vue3'
 
@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <AppLayout title="Postagens" :isAuthenticated="user" :user="user">
+  <Layout title="Postagens" :isAuthenticated="user" :user="user">
     <div
       class="bg-green-400 min-w-full h-[200px] flex justify-center items-center text-center"
     >
@@ -57,5 +57,5 @@ const props = defineProps({
         </template>
       </div>
     </div>
-  </AppLayout>
+  </Layout>
 </template>

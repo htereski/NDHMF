@@ -1,7 +1,7 @@
 <script setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import Quiz from '@/Components/Quiz.vue'
-import AppLayout from '@/Layouts/AppLayout.vue'
+import Layout from '@/Layouts/Layout.vue'
 import Chat from '@/Components/Chat.vue'
 import { ref } from 'vue'
 import ScrollToTopButton from '@/Components/ScrollToTopButton.vue'
@@ -16,7 +16,7 @@ const showQuiz = ref(false)
 </script>
 
 <template>
-  <AppLayout
+  <Layout
     title="Núcleo de Direitos Humanos Marielle Franco"
     :isAuthenticated="isAuthenticated"
     :user="user"
@@ -298,5 +298,5 @@ const showQuiz = ref(false)
     <Chat v-if="user && user.role.name == 'vitima'" :user="user" :chat="chat" />
 
     <ScrollToTopButton />
-  </AppLayout>
+  </Layout>
 </template>

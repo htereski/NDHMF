@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue'
+import Layout from '@/Layouts/Layout.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Editor from '@/Components/Editor.vue'
@@ -28,7 +28,7 @@ function submitForm() {
 </script>
 
 <template>
-  <AppLayout
+  <Layout
     title="Núcleo de Direitos Humanos Marielle Franco - Postagens"
     :isAuthenticated="true"
     :user="props.user"
@@ -87,5 +87,5 @@ function submitForm() {
         </div>
       </form>
     </div>
-  </AppLayout>
+  </Layout>
 </template>
