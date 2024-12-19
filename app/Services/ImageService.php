@@ -22,9 +22,4 @@ class ImageService
 
         return $path;
     }
-
-    public function convertImagePath(string $path): string
-    {
-        return asset($path);
-    }
 }

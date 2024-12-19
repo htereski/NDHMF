@@ -21,21 +21,19 @@ class PostService
         return array('user' => $user, 'posts' => Post::latest()->get());
     }
 
-    public function show(Post $post): array
+    public function show(Post $post)
     {
         $user = UserHelper::authenticated();
 
         $post->load('user');
-        $post->imagem = $this->convertImagePath($post);
+        $post->imagem = asset($post->imagem); 
 
         return array('user' => $user, 'post' => $post);
     }
 
     public function create(): User
     {
-        $user = UserHelper::authenticated();
-
-        return $user;
+        return UserHelper::authenticated();
     }
 
     public function store(Request $request): Post
@@ -58,7 +56,7 @@ class PostService
         ]);
 
         $post->load('user');
-        $post->imagem = $this->convertImagePath($post);
+        $post->imagem = asset($post->imagem);
 
         return $post;
     }
@@ -74,7 +72,7 @@ class PostService
 
         $post->load('user');
 
-        $post->imagem = $this->convertImagePath($post);
+        $post->imagem = asset($post->imagem);
 
         return array('user' => $user, 'post' => $post);
     }
@@ -103,14 +101,8 @@ class PostService
         $post->save();
 
         $post->load('user');
-        $post->imagem = $this->convertImagePath($post);
+        $post->imagem = asset($post->imagem);
 
-        return $post;
-    }
-
-    private function convertImagePath(Post $post): Post
-    {
-        $post->imagem = $this->imageService->convertImagePath($post->imagem);
         return $post;
     }
 
