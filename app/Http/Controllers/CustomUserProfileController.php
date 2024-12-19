@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\UserHelper;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
@@ -16,7 +17,8 @@ class CustomUserProfileController extends UserProfileController
         return Jetstream::inertia()->render($request, 'Profile/Show', [
             'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
             'sessions' => $this->sessions($request)->all(),
-            'isAuthenticated' => true
+            'isAuthenticated' => true,
+            'user' => UserHelper::authenticated()
         ]);
     }
 }
