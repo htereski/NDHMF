@@ -107,7 +107,7 @@ class PostService
             'post_id' => $post->id,
             'user_id' => Auth::id(),
         ]);
-        
+
         $post->load('editors');
         $post->load('user');
         $post->imagem = asset($post->imagem);
@@ -121,7 +121,7 @@ class PostService
 
         $imagePath = public_path($post->imagem);
 
-        if (File::exists($imagePath)) {
+        if (!str_contains($post->imagem, 'assets/img') && File::exists($imagePath)) {
             File::delete($imagePath);
         }
 
