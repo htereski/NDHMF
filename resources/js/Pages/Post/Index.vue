@@ -20,7 +20,7 @@ const props = defineProps({
     </div>
 
     <div
-      class="container mx-auto bg-gray-200 shadow-md p-6 flex flex-col items-start"
+      class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center"
     >
       <template v-if="user">
         <Link v-if="user.role.name != 'vitima'" :href="route('post.create')">
@@ -28,10 +28,14 @@ const props = defineProps({
         </Link>
       </template>
 
-      <div class="flex flex-wrap justify-start gap-6">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
         <template v-for="post in posts" :key="post.id">
           <Link :href="route('post.show', post)">
-            <div class="card w-80 h-96 shadow-xl rounded-xl bg-green-400">
+            <div
+              class="card w-full max-w-xs h-96 shadow-xl rounded-xl bg-green-400"
+            >
               <figure class="h-2/3 p-2">
                 <span
                   class="absolute inset-0 flex items-start justify-end text-black"
