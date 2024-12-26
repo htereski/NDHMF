@@ -11,10 +11,6 @@ class UserHelper
     {
         /** @var User|null $user **/
         $user = Auth::user();
-
-        if (isset($user)) {
-            $user->load('role');
-        }
         
         return $user;
     }

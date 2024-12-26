@@ -63,7 +63,7 @@ function deletePost() {
         ></div>
       </div>
       <div
-        v-if="user && user.role.name != 'vitima'"
+        v-if="user && user.role != 'VITIMA'"
         class="my-8 bg-white flex flex-col gap-2 rounded-r-lg p-6 w-fit h-fit"
       >
         <Link :href="route('post.edit', post)">Editar</Link>

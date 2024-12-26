@@ -70,7 +70,7 @@ const logout = () => {
                 <NavLink :href="route('post.index')"> Postagens </NavLink>
 
                 <NavLink
-                  v-if="user && user.role.name != 'vitima'"
+                  v-if="user && user.role != 'VITIMA'"
                   :href="route('chats')"
                 >
                   Chamados
@@ -310,7 +310,7 @@ const logout = () => {
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              v-if="user && user.role.name != 'vitima'"
+              v-if="user && user.role != 'VITIMA'"
               :href="route('chats')"
             >
               Chamados

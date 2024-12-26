@@ -295,7 +295,7 @@ const showQuiz = ref(false)
       <Quiz v-if="showQuiz"></Quiz>
     </section>
 
-    <Chat v-if="user && user.role.name == 'vitima'" :user="user" :chat="chat" />
+    <Chat v-if="user && user.role == 'VITIMA'" :user="user" :chat="chat" />
 
     <ScrollToTopButton />
   </Layout>

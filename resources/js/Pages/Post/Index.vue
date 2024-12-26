@@ -23,7 +23,7 @@ const props = defineProps({
       class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center"
     >
       <template v-if="user">
-        <Link v-if="user.role.name != 'vitima'" :href="route('post.create')">
+        <Link v-if="user.role != 'VITIMA'" :href="route('post.create')">
           <PrimaryButton class="mb-4">Criar postagem</PrimaryButton>
         </Link>
       </template>

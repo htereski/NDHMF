@@ -28,9 +28,11 @@ class NewChatMessage implements ShouldBroadcast
         return [
             'message' => [
                 'content' => $this->message->content,
+                'send_at' => $this->message->send_at,
                 'user' => [
+                    'id' => $this->user->id,
                     'name' => $this->user->name,
-                    'id' => $this->user->id
+                    'role' => $this->user->role
                 ],
             ],
         ];

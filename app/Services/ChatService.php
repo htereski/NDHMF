@@ -15,9 +15,18 @@ class ChatService
     {
         $user = UserHelper::authenticated();
 
-        $chats = Chat::with('messages.user')->get();
+        $chats = Chat::has('messages')->get();
 
         return array('chats' => $chats, 'user' => $user);
+    }
+
+    public function getMessages(int $id): array
+    {
+        $chat = Chat::find($id);
+
+        $messages = $chat->messages()->with('user')->get();
+
+        return array('messages' => $messages);
     }
 
     public function sendMessage(Request $request): void

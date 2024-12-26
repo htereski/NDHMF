@@ -14,7 +14,7 @@ class OrganizationMemberOnly
     {
         $user = UserHelper::authenticated();
 
-        if($user->role->name == 'vitima') {
+        if($user->role == 'VITIMA') {
             return redirect()->route('index');
         }
 

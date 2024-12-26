@@ -17,12 +17,10 @@ class HomeService
         if (isset($user)) {
             $user->load(['chats.messages.user']);
 
-            if ($user->role->name == 'vitima') {
+            if ($user->role == 'VITIMA') {
                 $chat = $user->chats->first();
 
-                $usersMembers = User::whereHas('role', function ($query) {
-                    $query->whereIn('name', ['admin', 'marielle']);
-                })->get();
+                $usersMembers = User::whereIn('role', ['ADMIN', 'MARIELLE'])->get();
 
                 if (!$chat) {
                     $chat = $this->createChatForUser($user, $usersMembers);
