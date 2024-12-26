@@ -55,7 +55,7 @@ onMounted(() => {
           props.chats[chatIndex].unanswered = true
         }
       }
-      
+
       scrollToBottom()
     })
   })
@@ -119,9 +119,13 @@ watch(currentChat, newChatId => {
 
 <template>
   <Layout title="Chamados" :isAuthenticated="true" :user="user">
-    <div class="p-6 bg-gray-100 min-h-screen">
-      <h1 class="text-2xl font-bold text-gray-700 mb-6">Meus Chamados</h1>
-
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        Chamados
+      </h2>
+    </template>
+    
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
       <div v-if="chats.length === 0" class="text-center text-gray-500">
         <p>Nenhum chat encontrado.</p>
       </div>
