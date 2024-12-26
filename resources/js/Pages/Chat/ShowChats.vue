@@ -44,6 +44,18 @@ onMounted(() => {
       groupedMessages.value[chat.id] = groupMessagesByDate(
         chatMessages.value[chat.id]
       )
+
+      const chatIndex = props.chats.findIndex(c => c.id === chat.id)
+      if (chatIndex !== -1) {
+        let role = e.message.user.role
+
+        if (role !== 'VITIMA') {
+          props.chats[chatIndex].unanswered = false
+        } else {
+          props.chats[chatIndex].unanswered = true
+        }
+      }
+      
       scrollToBottom()
     })
   })
@@ -75,7 +87,6 @@ const toggleChat = async chatId => {
     groupedMessages.value[chatId] = groupMessagesByDate(
       chatMessages.value[chatId]
     )
-
     nextTick(() => {
       scrollToBottom()
     })
@@ -122,7 +133,15 @@ watch(currentChat, newChatId => {
           class="p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
         >
           <div @click="toggleChat(chat.id)" class="cursor-pointer">
-            <h2 class="text-lg font-semibold text-gray-800">#{{ chat.id }}</h2>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg font-semibold text-gray-800">
+                #{{ chat.id }}
+              </h2>
+              <span
+                v-if="chat.unanswered"
+                class="bg-blue-500 w-2 h-2 rounded-full"
+              ></span>
+            </div>
           </div>
 
           <div

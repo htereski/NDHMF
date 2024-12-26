@@ -15,7 +15,7 @@ class ChatService
     {
         $user = UserHelper::authenticated();
 
-        $chats = Chat::has('messages')->get();
+        $chats = Chat::has('messages')->orderBy('unanswered', 'desc')->get();
 
         return array('chats' => $chats, 'user' => $user);
     }
@@ -44,6 +44,16 @@ class ChatService
             'content' => $request->content,
             'send_at' => now(),
         ]);
+
+        $chat = Chat::find($request->chat_id);
+
+        if ($user->role != 'VITIMA') {
+            $chat->unanswered = false;
+        } else {
+            $chat->unanswered = true;
+        }
+
+        $chat->save();
 
         event(new NewChatMessage($createdMessage, $user));
     }
