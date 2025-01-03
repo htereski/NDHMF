@@ -3,6 +3,8 @@ import { onMounted, ref, watch, nextTick } from 'vue'
 import Layout from '@/Layouts/Layout.vue'
 import { useForm } from '@inertiajs/vue3'
 import formatDate from '@/Utils/FormatDate.js'
+import InputLabel from '@/Components/InputLabel.vue'
+import TextInput from '@/Components/TextInput.vue'
 
 const props = defineProps({
   chats: Array,
@@ -15,6 +17,9 @@ const chatMessages = ref({})
 const groupedMessages = ref({})
 const inputMessages = ref({})
 const loading = ref(false)
+
+const search_id = ref('')
+const modalRef = ref(null)
 
 const form = useForm({
   content: '',
@@ -56,14 +61,24 @@ onMounted(() => {
         }
       }
 
-      scrollToBottom()
+      nextTick(() => {
+        scrollToBottom()
+        scrollToBottom('modal')
+      })
     })
   })
 })
 
-const scrollToBottom = () => {
+const scrollToBottom = (option = 'default') => {
   nextTick(() => {
-    const container = document.getElementById(`chat-${currentChat.value}`)
+    let container = null
+
+    if (option === 'default') {
+      container = document.getElementById(`chat-${currentChat.value}`)
+    } else {
+      container = document.getElementById(`chat-modal-${currentChat.value}`)
+    }
+
     if (container) {
       container.scrollTop = container.scrollHeight
     }
@@ -71,12 +86,14 @@ const scrollToBottom = () => {
 }
 
 const toggleChat = async chatId => {
+  const isChatOpen = openChatIds.value.includes(chatId)
   currentChat.value = chatId
 
-  if (openChatIds.value.includes(chatId)) {
-    openChatIds.value = []
+  if (isChatOpen) {
+    openChatIds.value = openChatIds.value.filter(id => id !== chatId)
+    return
   } else {
-    openChatIds.value = [chatId]
+    openChatIds.value = [...openChatIds.value, chatId]
   }
 
   loading.value = true
@@ -97,8 +114,51 @@ const toggleChat = async chatId => {
   }
 }
 
-const sendMessage = () => {
+const openModal = () => {
+  const modal = document.getElementById('my_modal_3')
+  modal.showModal()
+}
+
+const closeModal = () => {
+  const modal = document.getElementById('my_modal_3')
+  modal.close()
+}
+
+const searchChat = async () => {
+  if (search_id.value != '') {
+    loading.value = true
+    modalRef.value = true
+    currentChat.value = search_id.value
+
+    openModal()
+
+    try {
+      const response = await axios.get(route('chat.show', search_id.value))
+
+      chatMessages.value[search_id.value] = response.data.messages
+
+      groupedMessages.value[search_id.value] = groupMessagesByDate(
+        chatMessages.value[search_id.value]
+      )
+
+      if (!inputMessages.value[search_id.value]) {
+        inputMessages.value[search_id.value] = ''
+      }
+
+      nextTick(() => {
+        scrollToBottom('modal')
+      })
+    } catch (error) {
+      console.error('Erro ao buscar chat:', error)
+    } finally {
+      loading.value = false
+    }
+  }
+}
+
+const sendMessage = (option = 'default') => {
   const content = inputMessages.value[currentChat.value]?.trim()
+
   if (!content) return
 
   form.content = content
@@ -106,7 +166,14 @@ const sendMessage = () => {
   form.post(route('send.message'), {
     preserveScroll: true,
     onSuccess: () => {
-      inputMessages.value[currentChat.value] = ''
+      if (option == 'default') {
+        inputMessages.value[currentChat.value] = ''
+      } else {
+        inputMessages.value[currentChat.value] = ''
+        nextTick(() => {
+          scrollToBottom('modal')
+        })
+      }
     },
   })
 }
@@ -124,8 +191,38 @@ watch(currentChat, newChatId => {
         Chamados
       </h2>
     </template>
-    
+
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <div v-if="chats.length > 0" class="col-span-6 sm:col-span-4 mb-10">
+        <InputLabel for="id" value="ID" />
+        <div class="flex gap-2">
+          <TextInput
+            id="id"
+            v-model="search_id"
+            type="number"
+            class="mt-1 block w-full"
+            required
+            @keyup.enter="searchChat"
+          />
+          <InputError :message="form.errors.id" class="mt-2" />
+          <button
+            @click="searchChat"
+            class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+
+      <div
+        v-if="
+          !loading && search_id && !props.chats.find(c => c.id == search_id)
+        "
+        class="text-center text-gray-500"
+      >
+        <p>Chat não encontrado.</p>
+      </div>
+
       <div v-if="chats.length === 0" class="text-center text-gray-500">
         <p>Nenhum chat encontrado.</p>
       </div>
@@ -227,5 +324,79 @@ watch(currentChat, newChatId => {
         </div>
       </div>
     </div>
+
+    <dialog ref="modalRef" id="my_modal_3" class="modal">
+      <div class="modal-box min-h-96 bg-slate-50">
+        <button
+          class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          @click="closeModal"
+        >
+          ✕
+        </button>
+
+        <div
+          :id="'chat-modal-' + search_id"
+          class="mt-4 overflow-y-auto max-h-96"
+        >
+          <div
+            v-for="(item, index) in groupedMessages[search_id] || []"
+            :key="index"
+            class="mb-4"
+          >
+            <div
+              v-if="item.type === 'date'"
+              class="text-center text-gray-500 my-2"
+            >
+              {{ item.date }}
+            </div>
+            <div v-else>
+              <div v-if="item.user.id == user.id" class="flex justify-end">
+                <div
+                  class="bg-green-100 text-green-900 p-3 rounded-lg shadow-md max-w-xs"
+                >
+                  <p class="mt-1 text-end">{{ item.content }}</p>
+                  <p class="mt-1 prose-sm text-right">
+                    {{ formatDate(item.send_at, 'hour') }}
+                  </p>
+                </div>
+              </div>
+              <div v-else class="flex justify-start">
+                <div
+                  class="bg-slate-200 text-slate-800 p-3 rounded-lg shadow-md max-w-xs"
+                >
+                  <span class="flex gap-2">
+                    <strong>{{ item.user.name }}</strong>
+                    <img
+                      v-if="item.user.role != 'VITIMA'"
+                      class="rounded-full w-7"
+                      :src="'/assets/img/logo.ico'"
+                      alt="icone marielle"
+                    />
+                  </span>
+                  <p class="mt-1">{{ item.content }}</p>
+                  <p class="mt-1 prose-sm text-right">
+                    {{ formatDate(item.send_at, 'hour') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form @submit.prevent="sendMessage" class="flex gap-2 mt-4">
+          <input
+            v-model="inputMessages[search_id]"
+            type="text"
+            placeholder="Digite sua mensagem..."
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
+    </dialog>
   </Layout>
 </template>

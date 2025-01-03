@@ -25,6 +25,7 @@ Route::middleware([
     Route::middleware(OrganizationMemberOnly::class)->group(function () {
         Route::get('/chats', [ChatController::class, 'index'])->name('chats');
         Route::get('/chats/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.messages');
+        Route::get('/chats/show/{id}', [ChatController::class, 'show'])->name('chat.show');
         Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
         Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
         Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');

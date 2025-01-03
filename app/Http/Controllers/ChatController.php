@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ChatNotFoundException;
 use App\Services\ChatService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,6 +30,18 @@ class ChatController extends Controller
         return response()->json([
             'messages' => $data['messages']
         ]);
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        try {
+            $data = $this->chatService->show($id);
+            return response()->json($data, 200);
+        } catch (ChatNotFoundException $e) {
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro interno no servidor.'], 500);
+        }
     }
 
     public function send(Request $request)

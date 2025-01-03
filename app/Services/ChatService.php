@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\NewChatMessage;
+use App\Exceptions\ChatNotFoundException;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Helper\UserHelper;
@@ -27,6 +28,18 @@ class ChatService
         $messages = $chat->messages()->with('user')->get();
 
         return array('messages' => $messages);
+    }
+
+    public function show(int $id): array
+    {
+        $chat = Chat::find($id);
+
+        if (!$chat) {
+            throw new ChatNotFoundException();
+        }
+
+        $messages = $chat->messages()->with('user')->get();
+        return ['chat' => $chat, 'messages' => $messages];
     }
 
     public function sendMessage(Request $request): void
