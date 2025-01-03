@@ -338,7 +338,14 @@ watch(currentChat, newChatId => {
           :id="'chat-modal-' + search_id"
           class="mt-4 overflow-y-auto max-h-96"
         >
+          <div v-if="loading" class="flex justify-center items-center grow">
+            <div
+              class="w-8 h-8 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"
+            ></div>
+          </div>
+
           <div
+            v-else
             v-for="(item, index) in groupedMessages[search_id] || []"
             :key="index"
             class="mb-4"
@@ -383,19 +390,21 @@ watch(currentChat, newChatId => {
           </div>
         </div>
 
-        <form @submit.prevent="sendMessage" class="flex gap-2 mt-4">
-          <input
-            v-model="inputMessages[search_id]"
-            type="text"
-            placeholder="Digite sua mensagem..."
-            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
-          >
-            Enviar
-          </button>
-        </form>
+        <div v-if="!loading">
+          <form @submit.prevent="sendMessage" class="flex gap-2 mt-4">
+            <input
+              v-model="inputMessages[search_id]"
+              type="text"
+              placeholder="Digite sua mensagem..."
+              class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
       </div>
     </dialog>
   </Layout>
