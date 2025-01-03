@@ -44,7 +44,12 @@ class ChatService
         }
 
         $messages = $chat->messages()->with('user')->get();
-        return ['chat' => $chat, 'messages' => $messages];
+
+        $messages = $messages->map(function ($message) {
+            return (new MessageResource($message))->toArray(request());
+        });
+
+        return ['messages' => $messages];
     }
 
     public function sendMessage(Request $request): void
