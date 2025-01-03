@@ -7,6 +7,7 @@ use App\Exceptions\ChatNotFoundException;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Helper\UserHelper;
+use App\Http\Resources\MessageResource;
 use Illuminate\Http\Request;
 
 class ChatService
@@ -26,6 +27,10 @@ class ChatService
         $chat = Chat::find($id);
 
         $messages = $chat->messages()->with('user')->get();
+
+        $messages = $messages->map(function ($message) {
+            return (new MessageResource($message))->toArray(request());
+        });
 
         return array('messages' => $messages);
     }
