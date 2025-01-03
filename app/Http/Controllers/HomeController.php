@@ -17,7 +17,6 @@ class HomeController extends Controller
 
         return Inertia::render('Index', [
             'isAuthenticated' => $data['isAuthenticated'],
-            'user' => $data['user'],
             'chat' => $data['chat'],
         ]);
     }

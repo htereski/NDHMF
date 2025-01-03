@@ -5,10 +5,11 @@ use App\Http\Controllers\CustomUserProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\OrganizationMemberOnly;
+use App\Http\Middleware\ShareInertiaDataCustom;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::middleware(ShareInertiaDataCustom::class)->get('/', [HomeController::class, 'index'])->name('index');
 
 Route::middleware([
     'auth:sanctum',

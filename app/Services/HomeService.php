@@ -30,7 +30,7 @@ class HomeService
             $isAuthenticated = true;
         }
 
-        return array('isAuthenticated' => $isAuthenticated, 'chat' => $chat, 'user' => $user);
+        return array('isAuthenticated' => $isAuthenticated, 'chat' => $chat);
     }
 
     private function createChatForUser(User $user, $usersMembers)

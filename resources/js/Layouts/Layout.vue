@@ -12,7 +12,6 @@ import { buildFullUrl } from '@/Utils/Url'
 defineProps({
   title: String,
   isAuthenticated: Boolean,
-  user: Object,
 })
 
 const showingNavigationDropdown = ref(false)
@@ -70,7 +69,7 @@ const logout = () => {
                 <NavLink :href="route('post.index')"> Postagens </NavLink>
 
                 <NavLink
-                  v-if="user && user.role != 'VITIMA'"
+                  v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
                   :href="route('chats')"
                 >
                   Chamados
@@ -310,7 +309,7 @@ const logout = () => {
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              v-if="user && user.role != 'VITIMA'"
+              v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
               :href="route('chats')"
             >
               Chamados
