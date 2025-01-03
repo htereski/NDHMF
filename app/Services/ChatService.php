@@ -16,9 +16,9 @@ class ChatService
     {
         $user = UserHelper::authenticated();
 
-        $chats = Chat::has('messages')->orderBy('unanswered', 'desc')->get();
+        $paginate = Chat::has('messages')->orderBy('unanswered', 'desc')->paginate(5);
 
-        return array('chats' => $chats, 'user' => $user);
+        return array('paginate' => $paginate, 'chats' => $paginate->items(), 'user' => $user);
     }
 
     public function getMessages(int $id): array

@@ -18,6 +18,7 @@ class ChatController extends Controller
         $data = $this->chatService->getChats();
 
         return Inertia::render('Chat/Show', [
+            'paginate' => $data['paginate'],
             'chats' => $data['chats'],
             'user' => $data['user'],
         ]);

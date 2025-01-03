@@ -5,8 +5,10 @@ import { useForm } from '@inertiajs/vue3'
 import formatDate from '@/Utils/FormatDate.js'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
+import Pagination from '@/Components/Pagination.vue'
 
 const props = defineProps({
+  paginate: Object,
   chats: Array,
   user: Object,
 })
@@ -407,5 +409,7 @@ watch(currentChat, newChatId => {
         </div>
       </div>
     </dialog>
+
+    <Pagination :pagination="paginate"> </Pagination>
   </Layout>
 </template>
