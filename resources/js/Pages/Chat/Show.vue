@@ -151,6 +151,7 @@ const searchChat = async () => {
         scrollToBottom('modal')
       })
     } catch (error) {
+      closeModal()
       console.error('Erro ao buscar chat:', error)
     } finally {
       loading.value = false
@@ -214,15 +215,6 @@ watch(currentChat, newChatId => {
             Buscar
           </button>
         </div>
-      </div>
-
-      <div
-        v-if="
-          !loading && search_id && !props.chats.find(c => c.id == search_id)
-        "
-        class="text-center text-gray-500"
-      >
-        <p>Chat não encontrado.</p>
       </div>
 
       <div v-if="chats.length === 0" class="text-center text-gray-500">
