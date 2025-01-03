@@ -10,7 +10,6 @@ import Pagination from '@/Components/Pagination.vue'
 const props = defineProps({
   paginate: Object,
   chats: Array,
-  user: Object,
 })
 
 const openChatIds = ref([])
@@ -188,7 +187,11 @@ watch(currentChat, newChatId => {
 </script>
 
 <template>
-  <Layout title="Chamados" :isAuthenticated="true" :user="user">
+  <Layout
+    title="Chamados"
+    :isAuthenticated="true"
+    :user="$page.props.auth.user"
+  >
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Chamados
@@ -263,7 +266,10 @@ watch(currentChat, newChatId => {
                   {{ item.date }}
                 </div>
                 <div v-else>
-                  <div v-if="item.user.id == user.id" class="flex justify-end">
+                  <div
+                    v-if="item.user.id == $page.props.auth.user.id"
+                    class="flex justify-end"
+                  >
                     <div
                       class="bg-green-100 text-green-900 p-3 rounded-lg shadow-md max-w-xs"
                     >
@@ -351,7 +357,10 @@ watch(currentChat, newChatId => {
               {{ item.date }}
             </div>
             <div v-else>
-              <div v-if="item.user.id == user.id" class="flex justify-end">
+              <div
+                v-if="item.user.id == $page.props.auth.user.id"
+                class="flex justify-end"
+              >
                 <div
                   class="bg-green-100 text-green-900 p-3 rounded-lg shadow-md max-w-xs"
                 >

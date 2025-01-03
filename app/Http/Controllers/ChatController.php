@@ -20,7 +20,6 @@ class ChatController extends Controller
         return Inertia::render('Chat/Show', [
             'paginate' => $data['paginate'],
             'chats' => $data['chats'],
-            'user' => $data['user'],
         ]);
     }
 
