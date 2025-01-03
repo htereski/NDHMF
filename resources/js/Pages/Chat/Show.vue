@@ -320,7 +320,7 @@ watch(currentChat, newChatId => {
     </div>
 
     <dialog ref="modalRef" id="my_modal_3" class="modal">
-      <div class="modal-box min-h-96 bg-slate-50">
+      <div class="modal-box min-h-96 bg-slate-50 flex flex-col">
         <button
           class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           @click="closeModal"
@@ -330,7 +330,7 @@ watch(currentChat, newChatId => {
 
         <div
           :id="'chat-modal-' + search_id"
-          class="mt-4 overflow-y-auto max-h-96"
+          class="mt-4 overflow-y-auto max-h-96 flex-1"
         >
           <div v-if="loading" class="flex justify-center items-center grow">
             <div
@@ -384,8 +384,8 @@ watch(currentChat, newChatId => {
           </div>
         </div>
 
-        <div v-if="!loading">
-          <form @submit.prevent="sendMessage" class="flex gap-2 mt-4">
+        <div v-if="!loading" class="mt-4 flex-shrink-0">
+          <form @submit.prevent="sendMessage" class="flex gap-2">
             <input
               v-model="inputMessages[search_id]"
               type="text"
