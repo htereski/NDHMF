@@ -23,7 +23,7 @@ class ShareInertiaDataCustom
                         return;
                     }
 
-                    return $user->only(['id', 'name', 'email', 'role']);
+                    return $user->only(['name', 'email', 'role']);
                 },
             ],
         ]));

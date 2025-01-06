@@ -18,7 +18,6 @@ class PostController extends Controller
         $data = $this->postService->index();
 
         return Inertia::render('Post/Index', [
-            'user' => $data['user'],
             'posts' => $data['posts']
         ]);
     }
@@ -28,22 +27,21 @@ class PostController extends Controller
         $data = $this->postService->show($post);
 
         return Inertia::render('Post/Show', [
-            'user' => $data['user'],
             'post' => $data['post'],
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Post/Create', [
-            'user' => $this->postService->create()
-        ]);
+        return Inertia::render('Post/Create', []);
     }
 
     public function store(Request $request): Response
     {
+        $data = $this->postService->store($request);
+
         return Inertia::render('Post/Show', [
-            'post' => $this->postService->store($request)
+            'post' => $data['post']
         ]);
     }
 
@@ -52,15 +50,16 @@ class PostController extends Controller
         $data = $this->postService->edit($post);
 
         return Inertia::render('Post/Edit', [
-            'user' => $data['user'],
             'post' => $data['post']
         ]);
     }
 
     public function update(Request $request, string $id): Response
     {
+        $data = $this->postService->update($request, $id);
+
         return Inertia::render('Post/Show', [
-            'post' => $this->postService->update($request, $id),
+            'post' => $data['post']
         ]);
     }
 
@@ -69,7 +68,6 @@ class PostController extends Controller
         $data = $this->postService->destroy($id);
 
         return Inertia::render('Post/Index', [
-            'user' => $data['user'],
             'posts' => $data['posts']
         ]);
     }

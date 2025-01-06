@@ -16,6 +16,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -27,15 +28,22 @@ Route::middleware([
         Route::get('/chats', [ChatController::class, 'index'])->name('chats');
         Route::get('/chats/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.messages');
         Route::get('/chats/show/{id}', [ChatController::class, 'show'])->name('chat.show');
-        Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
-        Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
-        Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
-        Route::post('/post', [PostController::class, 'store'])->name('post.store');
-        Route::delete('/post/destroy/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+
+        Route::middleware(ShareInertiaDataCustom::class)->group(function () {
+
+            Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+            Route::post('/post', [PostController::class, 'store'])->name('post.store');
+            Route::get('/post/edit/{post}', [PostController::class, 'edit'])->name('post.edit');
+            Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
+            Route::delete('/post/destroy/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+        });
     });
 
     Route::post('/send/message', [ChatController::class, 'send'])->name('send.message');
 });
 
-Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
-Route::get('/post', [PostController::class, 'index'])->name('post.index');
+Route::middleware(ShareInertiaDataCustom::class)->group(function () {
+    Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+
+    Route::get('/post', [PostController::class, 'index'])->name('post.index');
+});

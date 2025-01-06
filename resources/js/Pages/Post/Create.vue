@@ -6,10 +6,6 @@ import Editor from '@/Components/Editor.vue'
 import { useForm } from '@inertiajs/vue3'
 import { Link } from '@inertiajs/vue3'
 
-const props = defineProps({
-  user: Object,
-})
-
 const form = useForm({
   titulo: null,
   texto: null,
@@ -31,7 +27,7 @@ function submitForm() {
   <Layout
     title="Núcleo de Direitos Humanos Marielle Franco - Postagens"
     :isAuthenticated="true"
-    :user="props.user"
+    :user="$page.props.auth.user"
   >
     <div
       class="container mx-auto max-w-4xl my-8 bg-white shadow-lg rounded-lg p-6"

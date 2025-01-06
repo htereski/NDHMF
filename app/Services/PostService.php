@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Models\Post;
-use App\Models\User;
 use App\Helper\UserHelper;
+use App\Http\Resources\SimplePostResource;
+use App\Http\Resources\PostResource;
 use App\Models\PostEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,28 +19,27 @@ class PostService
 
     public function index(): array
     {
-        $user = UserHelper::authenticated();
+        $posts = Post::latest()->get();
 
-        return array('user' => $user, 'posts' => Post::latest()->get());
+        $posts = $posts->map(function ($post) {
+            return (new SimplePostResource($post))->toArray(request());
+        });
+
+        return array('posts' => $posts);
     }
 
-    public function show(Post $post)
+    public function show(Post $post): array
     {
-        $user = UserHelper::authenticated();
-
         $post->load('user');
         $post->load('editors');
         $post->imagem = asset($post->imagem);
 
-        return array('user' => $user, 'post' => $post);
+        $post = new PostResource($post);
+
+        return array('post' => $post->toArray(request()));
     }
 
-    public function create(): User
-    {
-        return UserHelper::authenticated();
-    }
-
-    public function store(Request $request): Post
+    public function store(Request $request): array
     {
         $request->validate([
             'titulo' => ['required', 'max:255', 'unique:posts'],
@@ -61,7 +61,9 @@ class PostService
         $post->load('user');
         $post->imagem = asset($post->imagem);
 
-        return $post;
+        $post = new PostResource($post);
+
+        return array('post' => $post->toArray(request()));
     }
 
     private function createURLImage(Request $request): void
@@ -71,16 +73,14 @@ class PostService
 
     public function edit(Post $post): array
     {
-        $user = UserHelper::authenticated();
-
-        $post->load('user');
-
         $post->imagem = asset($post->imagem);
 
-        return array('user' => $user, 'post' => $post);
+        $post = new SimplePostResource($post);
+
+        return array('post' => $post->toArray(request()));
     }
 
-    public function update(Request $request, string $id): Post
+    public function update(Request $request, string $id): array
     {
         $post = Post::findOrFail($id);
 
@@ -108,11 +108,13 @@ class PostService
             'user_id' => Auth::id(),
         ]);
 
-        $post->load('editors');
         $post->load('user');
+        $post->load('editors');
         $post->imagem = asset($post->imagem);
 
-        return $post;
+        $post = new PostResource($post);
+
+        return array('post' => $post->toArray(request()));
     }
 
     public function destroy(string $id): array
@@ -133,8 +135,8 @@ class PostService
             $singlePost->imagem = asset($singlePost->imagem);
         }
 
-        $user = UserHelper::authenticated();
+        $posts = SimplePostResource::collection($posts);
 
-        return array('user' => $user, 'posts' => $posts);
+        return array('posts' => $posts->toArray(request()));
     }
 }

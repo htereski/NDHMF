@@ -5,12 +5,11 @@ import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
   posts: Array,
-  user: Object,
 })
 </script>
 
 <template>
-  <Layout title="Postagens" :isAuthenticated="user" :user="user">
+  <Layout title="Postagens" :isAuthenticated="$page.props.auth.user" :user="$page.props.auth.user">
     <div
       class="bg-green-400 min-w-full h-[200px] flex justify-center items-center text-center"
     >
@@ -22,8 +21,8 @@ const props = defineProps({
     <div
       class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center"
     >
-      <template v-if="user">
-        <Link v-if="user.role != 'VITIMA'" :href="route('post.create')">
+      <template v-if="$page.props.auth.user">
+        <Link v-if="$page.props.auth.user.role != 'VITIMA'" :href="route('post.create')">
           <PrimaryButton class="mb-4">Criar postagem</PrimaryButton>
         </Link>
       </template>

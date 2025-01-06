@@ -6,7 +6,6 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 
 const props = defineProps({
   post: Object,
-  user: Object,
 })
 
 const form = useForm({})
@@ -21,8 +20,8 @@ function deletePost() {
 <template>
   <Layout
     title="Núcleo de Direitos Humanos Marielle Franco - Postagens"
-    :isAuthenticated="user"
-    :user="user"
+    :isAuthenticated="$page.props.auth.user"
+    :user="$page.props.auth.user"
   >
     <div class="container mx-auto max-w-4xl mt-8">
       <Link :href="route('post.index')">
@@ -52,7 +51,7 @@ function deletePost() {
           >
           <template v-for="editors in post.editors" :key="editors.id">
             <p class="prose-md mt-1">
-              {{ formatDate(editors.pivot.created_at) }} por {{ editors.name }}
+              {{ formatDate(editors.created_at) }} por {{ editors.name }}
             </p>
           </template>
         </template>
@@ -63,7 +62,7 @@ function deletePost() {
         ></div>
       </div>
       <div
-        v-if="user && user.role != 'VITIMA'"
+        v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
         class="my-8 bg-white flex flex-col gap-2 rounded-r-lg p-6 w-fit h-fit"
       >
         <Link :href="route('post.edit', post)">Editar</Link>
