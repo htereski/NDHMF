@@ -22,12 +22,10 @@ class PostResource extends JsonResource
             'created_at' => $this->created_at,
             'user' => [
                 'name' => $this->user->name,
-                'role' => $this->user->role,
             ],
             'editors' => $this->editors->map(function ($editor) {
                 return [
                     'name' => $editor->name,
-                    'role' => $editor->role,
                     'created_at' => $editor->pivot->created_at,
                 ];
             }),
