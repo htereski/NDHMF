@@ -21,7 +21,7 @@ const submit = () => {
 </script>
 
 <template>
-  <Head title="Forgot Password" />
+  <Head title="Esqueceu sua senha" />
 
   <AuthenticationCard>
     <template #logo>
