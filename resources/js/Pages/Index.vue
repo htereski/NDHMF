@@ -7,9 +7,7 @@ import { ref } from 'vue'
 import ScrollToTopButton from '@/Components/ScrollToTopButton.vue'
 
 defineProps({
-  isAuthenticated: Boolean,
   chat: Object,
-  user: Object,
 })
 
 const showQuiz = ref(false)
@@ -18,8 +16,8 @@ const showQuiz = ref(false)
 <template>
   <Layout
     title="Núcleo de Direitos Humanos Marielle Franco"
-    :isAuthenticated="isAuthenticated"
-    :user="user"
+    :isAuthenticated="$page.props.auth.user"
+    :user="$page.props.auth.user"
   >
     <div class="hero bg-white min-h-[70vh]">
       <div class="hero-content text-center">
@@ -295,7 +293,11 @@ const showQuiz = ref(false)
       <Quiz v-if="showQuiz"></Quiz>
     </section>
 
-    <Chat v-if="user && user.role == 'VITIMA'" :user="user" :chat="chat" />
+    <Chat
+      v-if="$page.props.auth.user && $page.props.auth.user.role == 'VITIMA'"
+      :user="$page.props.auth.user"
+      :chat="chat"
+    />
 
     <ScrollToTopButton />
   </Layout>

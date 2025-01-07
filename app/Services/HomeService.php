@@ -11,7 +11,6 @@ class HomeService
     public function principal(): array
     {
         $user = UserHelper::authenticated();
-        $isAuthenticated = false;
         $chat = null;
 
         if (isset($user)) {
@@ -26,14 +25,12 @@ class HomeService
                     $chat = $this->createChatForUser($user, $usersMembers);
                 }
             }
-
-            $isAuthenticated = true;
         }
 
-        return array('isAuthenticated' => $isAuthenticated, 'chat' => $chat);
+        return array('chat' => $chat);
     }
 
-    private function createChatForUser(User $user, $usersMembers)
+    private function createChatForUser(User $user, array $usersMembers): Chat
     {
         $chat = Chat::create();
         $user->chats()->attach($chat->id);
