@@ -17,10 +17,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
     Route::middleware(OrganizationMemberOnly::class)->group(function () {
         Route::get('/chats', [ChatController::class, 'index'])->name('chats');
         Route::get('/chats/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.messages');
