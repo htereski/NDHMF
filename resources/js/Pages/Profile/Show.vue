@@ -10,15 +10,13 @@ import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfile
 defineProps({
   confirmsTwoFactorAuthentication: Boolean,
   sessions: Array,
-  isAuthenticated: Boolean,
-  user: Object
 })
 </script>
 
 <template>
-  <Layout title="Profile" :isAuthenticated="isAuthenticated" :user="user">
+  <Layout title="Perfil" :isAuthenticated="$page.props.auth.user" :user="$page.props.auth.user">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Perfil</h2>
     </template>
 
     <div>

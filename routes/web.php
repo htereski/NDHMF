@@ -21,9 +21,6 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/user/profile', [CustomUserProfileController::class, 'show'])
-        ->name('profile.show');
-
     Route::middleware(OrganizationMemberOnly::class)->group(function () {
         Route::get('/chats', [ChatController::class, 'index'])->name('chats');
         Route::get('/chats/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.messages');

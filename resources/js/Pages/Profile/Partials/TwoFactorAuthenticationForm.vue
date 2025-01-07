@@ -105,10 +105,11 @@ const disableTwoFactorAuthentication = () => {
 
 <template>
   <ActionSection>
-    <template #title> Two Factor Authentication </template>
+    <template #title> Autenticação de dois fatores </template>
 
     <template #description>
-      Add additional security to your account using two factor authentication.
+      Adicione uma camada a mais de segurança para acessar sua conta usando
+      autenticação de dois fatores.
     </template>
 
     <template #content>
@@ -127,14 +128,15 @@ const disableTwoFactorAuthentication = () => {
       </h3>
 
       <h3 v-else class="text-lg font-medium text-gray-900">
-        You have not enabled two factor authentication.
+        Você ainda não habilitou a autenticação de dois fatores.
       </h3>
 
       <div class="mt-3 max-w-xl text-sm text-gray-600">
         <p>
-          When two factor authentication is enabled, you will be prompted for a
-          secure, random token during authentication. You may retrieve this
-          token from your phone's Google Authenticator application.
+          Quando a autenticação de dois fatores estiver habilitada, você será
+          solicitado a fornecer um token aleatório seguro durante a
+          autenticação. Você pode recuperar esse token do aplicativo Google
+          Authenticator do seu telefone.
         </p>
       </div>
 
@@ -208,7 +210,7 @@ const disableTwoFactorAuthentication = () => {
               :class="{ 'opacity-25': enabling }"
               :disabled="enabling"
             >
-              Enable
+              Habilitar
             </PrimaryButton>
           </ConfirmsPassword>
         </div>
@@ -222,7 +224,7 @@ const disableTwoFactorAuthentication = () => {
               :class="{ 'opacity-25': enabling }"
               :disabled="enabling"
             >
-              Confirm
+              Confirmar
             </PrimaryButton>
           </ConfirmsPassword>
 
