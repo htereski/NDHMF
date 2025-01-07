@@ -9,20 +9,25 @@ const props = defineProps({
 </script>
 
 <template>
-  <Layout title="Postagens" :isAuthenticated="$page.props.auth.user" :user="$page.props.auth.user">
-    <div
-      class="bg-green-400 min-w-full h-[200px] flex justify-center items-center text-center"
-    >
-      <h2 class="text-2xl text-white mb-5">
+  <Layout
+    title="Postagens"
+    :isAuthenticated="$page.props.auth.user"
+    :user="$page.props.auth.user"
+  >
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Fique por dentro das últimas postagens
       </h2>
-    </div>
+    </template>
 
     <div
       class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center"
     >
       <template v-if="$page.props.auth.user">
-        <Link v-if="$page.props.auth.user.role != 'VITIMA'" :href="route('post.create')">
+        <Link
+          v-if="$page.props.auth.user.role != 'VITIMA'"
+          :href="route('post.create')"
+        >
           <PrimaryButton class="mb-4">Criar postagem</PrimaryButton>
         </Link>
       </template>
