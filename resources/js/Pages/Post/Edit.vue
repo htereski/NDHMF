@@ -3,7 +3,7 @@ import Layout from '@/Layouts/Layout.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Editor from '@/Components/Editor.vue'
-import { useForm } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
   user: Object,
@@ -33,6 +33,12 @@ function submitForm() {
     :isAuthenticated="true"
     :user="props.user"
   >
+    <div class="container mx-auto max-w-4xl mt-8">
+      <Link class="mx-auto" href="#" onclick="history.back()">
+        <SecondaryButton class="bg-transparent"> Voltar </SecondaryButton>
+      </Link>
+    </div>
+
     <div
       class="container mx-auto max-w-4xl my-8 bg-white shadow-lg rounded-lg p-6"
     >
@@ -80,9 +86,6 @@ function submitForm() {
         <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
 
         <div class="flex my-5">
-          <a class="mx-auto" href="#" onclick="history.back()">
-            <SecondaryButton class="bg-transparent"> Voltar </SecondaryButton>
-          </a>
           <PrimaryButton class="mx-auto"> Editar postagem </PrimaryButton>
         </div>
       </form>

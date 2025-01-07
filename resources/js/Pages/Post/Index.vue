@@ -16,7 +16,7 @@ const props = defineProps({
   >
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Fique por dentro das últimas postagens
+        Postagens
       </h2>
     </template>
 

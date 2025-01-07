@@ -3,6 +3,8 @@ import Layout from '@/Layouts/Layout.vue'
 import formatDate from '@/Utils/FormatDate.js'
 import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
+import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
 
 const props = defineProps({
   post: Object,
@@ -29,9 +31,27 @@ function deletePost() {
       </Link>
     </div>
 
-    <div class="container flex justify-center mx-auto">
+    <div class="container flex flex-col mx-auto items-center">
       <div
-        class="container max-w-4xl my-8 bg-white shadow-lg rounded-s-lg rounded-br-lg p-6"
+        v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
+        class="container mx-auto max-w-4xl flex justify-end"
+      >
+        <div
+          class="mt-8 bg-white flex gap-3 rounded-tl-lg rounded-tr-lg p-4 w-fit h-fit"
+        >
+          <Link
+            :href="route('post.edit', post)"
+            class="text-blue-600 hover:text-blue-800"
+          >
+            <Pencil />
+          </Link>
+          <button class="text-red-600 hover:text-red-800" @click="deletePost">
+            <Delete />
+          </button>
+        </div>
+      </div>
+      <div
+        class="container max-w-4xl bg-white shadow-lg rounded-s-lg rounded-br-lg p-6"
       >
         <div class="flex justify-center my-6">
           <img :src="post.imagem" alt="foto" />
@@ -60,18 +80,6 @@ function deletePost() {
           class="my-8 prose-lg text-justify text-black w-full indent-10"
           v-html="post.texto"
         ></div>
-      </div>
-      <div
-        v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
-        class="my-8 bg-white flex flex-col gap-2 rounded-r-lg p-6 w-fit h-fit"
-      >
-        <Link :href="route('post.edit', post)">Editar</Link>
-        <button
-          class="text-red-600 hover:text-red-800 underline"
-          @click="deletePost"
-        >
-          Excluir
-        </button>
       </div>
     </div>
   </Layout>
