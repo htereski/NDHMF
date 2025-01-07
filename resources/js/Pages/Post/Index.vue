@@ -2,8 +2,10 @@
 import Layout from '@/Layouts/Layout.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Link } from '@inertiajs/vue3'
+import Pagination from '@/Components/Pagination.vue'
 
 const props = defineProps({
+  paginate: Object,
   posts: Array,
 })
 </script>
@@ -21,7 +23,7 @@ const props = defineProps({
     </template>
 
     <div
-      class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center"
+      class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center mb-10"
     >
       <template v-if="$page.props.auth.user">
         <Link
@@ -65,5 +67,7 @@ const props = defineProps({
         </template>
       </div>
     </div>
+
+    <Pagination :pagination="paginate"> </Pagination>
   </Layout>
 </template>

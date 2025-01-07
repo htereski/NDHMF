@@ -18,7 +18,8 @@ class PostController extends Controller
         $data = $this->postService->index();
 
         return Inertia::render('Post/Index', [
-            'posts' => $data['posts']
+            'posts' => $data['posts'],
+            'paginate' => $data['paginate']
         ]);
     }
 

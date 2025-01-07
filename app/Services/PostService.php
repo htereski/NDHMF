@@ -19,13 +19,13 @@ class PostService
 
     public function index(): array
     {
-        $posts = Post::latest()->get();
+        $paginate = Post::latest()->paginate(8);
 
-        $posts = $posts->map(function ($post) {
+        $posts = $paginate->map(function ($post) {
             return (new SimplePostResource($post))->toArray(request());
         });
 
-        return array('posts' => $posts);
+        return array('posts' => $posts, 'paginate' => $paginate);
     }
 
     public function show(Post $post): array
