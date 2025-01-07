@@ -11,7 +11,6 @@ import { buildFullUrl } from '@/Utils/Url'
 
 defineProps({
   title: String,
-  isAuthenticated: Boolean,
 })
 
 const showingNavigationDropdown = ref(false)
@@ -76,7 +75,7 @@ const logout = () => {
                 </NavLink>
               </div>
 
-              <template v-if="!isAuthenticated">
+              <template v-if="!$page.props.auth.user">
                 <div class="hidden space-x-8 sm:-my-px lg:ms-80 lg:flex">
                   <NavLink
                     :href="route('login')"
@@ -95,11 +94,11 @@ const logout = () => {
               </template>
             </div>
 
-            <template v-if="isAuthenticated">
+            <template v-if="$page.props.auth.user">
               <div
                 class="hidden lg:items-center space-x-8 sm:-my-px lg:ms-80 lg:flex"
               >
-                <template v-if="isAuthenticated">
+                <template v-if="$page.props.auth.user">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -163,9 +162,9 @@ const logout = () => {
               </div>
             </template>
 
-            <template v-if="!isAuthenticated">
+            <template v-if="!$page.props.auth.user">
               <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <template v-if="isAuthenticated">
+                <template v-if="$page.props.auth.user">
                   <div class="ms-3 relative">
                     <Dropdown align="right" width="48">
                       <template #trigger>
@@ -275,7 +274,7 @@ const logout = () => {
           class="lg:hidden"
         >
           <div class="pt-2 pb-3 space-y-1">
-            <template v-if="!isAuthenticated">
+            <template v-if="!$page.props.auth.user">
               <ResponsiveNavLink
                 :href="route('login')"
                 :active="route().current('dashboard')"
@@ -318,7 +317,7 @@ const logout = () => {
 
           <!-- Responsive Settings Options -->
 
-          <template v-if="isAuthenticated">
+          <template v-if="$page.props.auth.user">
             <div class="pt-4 pb-1 border-t border-gray-200">
               <div class="flex items-center px-4">
                 <div
