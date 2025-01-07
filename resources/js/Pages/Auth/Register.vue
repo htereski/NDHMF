@@ -24,7 +24,7 @@ const submit = () => {
 </script>
 
 <template>
-  <Head title="Register" />
+  <Head title="Registre-se" />
 
   <AuthenticationCard>
     <template #logo>
@@ -33,7 +33,7 @@ const submit = () => {
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="name" value="Name" />
+        <InputLabel for="name" value="Nome" />
         <TextInput
           id="name"
           v-model="form.name"
@@ -60,7 +60,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="Password" />
+        <InputLabel for="password" value="Senha" />
         <TextInput
           id="password"
           v-model="form.password"
@@ -73,7 +73,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password_confirmation" value="Confirm Password" />
+        <InputLabel for="password_confirmation" value="Confirmação de senha" />
         <TextInput
           id="password_confirmation"
           v-model="form.password_confirmation"
@@ -124,7 +124,7 @@ const submit = () => {
           :href="route('login')"
           class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Already registered?
+          Já registrado?
         </Link>
 
         <PrimaryButton
@@ -132,7 +132,7 @@ const submit = () => {
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          Register
+          Registre-se
         </PrimaryButton>
       </div>
     </form>
