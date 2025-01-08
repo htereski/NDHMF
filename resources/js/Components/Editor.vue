@@ -144,6 +144,6 @@ const editor = useEditor({
       </button>
     </section>
 
-    <EditorContent :editor="editor" />
+    <EditorContent class="text-black marker:text-black" :editor="editor" />
   </div>
 </template>

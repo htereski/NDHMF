@@ -25,10 +25,53 @@ export default {
               margin: 0,
             },
             li: {
-              margin: 5,
+              margin: 0,
               p: {
                 margin: 0,
               },
+            },
+            strong: {
+              color: '#000',
+            },
+            h1: {
+              color: '#000',
+            },
+            h2: {
+              color: '#000',
+            },
+            li: {
+              color: '#000',
+            },
+            ul: {
+              padding: 10,
+              margin: 0,
+              li: {
+                margin: 0,
+                p: {
+                  margin: 0,
+                },
+              },
+            },
+            ol: {
+              padding: 10,
+              margin: 0,
+              li: {
+                margin: 0,
+                p: {
+                  margin: 0,
+                },
+              },
+            },
+            blockquote: {
+              color: '#000',
+            },
+            code: {
+              color: '#000',
+            },
+            hr: {
+              backgroundColor: '#b7b5b5',
+              padding: 1,
+              margin: 5,
             },
           },
         },
@@ -43,8 +86,8 @@ export default {
           color: '#000',
         },
         select: {
-            color: '#000',
-        }
+          color: '#000',
+        },
       })
     },
     forms,
