@@ -29,6 +29,12 @@ function submitForm() {
     :isAuthenticated="true"
     :user="$page.props.auth.user"
   >
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        Criar postagem
+      </h2>
+    </template>
+
     <div class="container mx-auto max-w-4xl mt-8">
       <Link :href="route('post.index')">
         <SecondaryButton class="mb-4">Voltar</SecondaryButton>
@@ -38,7 +44,6 @@ function submitForm() {
     <div
       class="container mx-auto max-w-4xl my-8 bg-white shadow-lg rounded-lg p-6"
     >
-      <h2 class="text-2xl text-black mb-5">Criar postagem</h2>
       <form @submit.prevent="submitForm">
         <div
           class="relative mx-auto max-w-[300px] sm:max-w-[400px] aspect-square overflow-hidden border border-slate-300"
@@ -82,7 +87,7 @@ function submitForm() {
         <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
 
         <div class="flex my-5">
-          <PrimaryButton class="mx-auto"> Criar postagem </PrimaryButton>
+          <PrimaryButton class="mx-auto"> Postar </PrimaryButton>
         </div>
       </form>
     </div>

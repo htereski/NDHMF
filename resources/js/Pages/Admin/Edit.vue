@@ -36,7 +36,7 @@ const submit = () => {
   >
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Cadastrar Usuário
+        Editar Usuário
       </h2>
     </template>
 

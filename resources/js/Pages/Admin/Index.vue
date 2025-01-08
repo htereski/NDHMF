@@ -1,9 +1,11 @@
 <script setup>
 import Layout from '@/Layouts/Layout.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 import Pagination from '@/Components/Pagination.vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
+import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 
 const props = defineProps({
   users: Array,
@@ -35,21 +37,17 @@ function deleteUser(id) {
         Colaboradores do projeto
       </h2>
     </template>
-    <div class="container flex flex-col mx-auto items-center mt-8">
+    <div class="container flex flex-col mx-auto items-center mt-8 mb-10">
       <div
         class="w-full relative overflow-x-auto sm:rounded-lg flex justify-end mb-8"
       >
         <Link :href="route('admin.create')">
-          <SecondaryButton>Criar</SecondaryButton></Link
-        >
+          <SecondaryButton><AccountPlus /></SecondaryButton
+        ></Link>
       </div>
       <div class="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          >
+        <table class="w-full text-sm text-left rtl:text-right text-black">
+          <thead class="text-xs text-black uppercase bg-white">
             <tr>
               <th scope="col" class="px-6 py-3">Nome</th>
               <th scope="col" class="px-6 py-3">Papel</th>
@@ -61,30 +59,25 @@ function deleteUser(id) {
             <tr
               v-for="user in users.users.data"
               :key="user.id"
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-100"
             >
               <th
                 scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                class="px-6 py-4 font-medium text-black whitespace-nowrap"
               >
                 {{ user.name }}
               </th>
               <td class="px-6 py-4">{{ user.role }}</td>
               <td class="px-6 py-4">
-                <Link
-                  :href="`${route('admin.edit', user.id)}`"
-                  class="text-blue-600 dark:text-blue-400"
-                >
-                  Editar
+                <Link :href="`${route('admin.edit', user.id)}`">
+                  <Pencil class="text-blue-600 hover:text-blue-800" />
                 </Link>
               </td>
               <td class="px-6 py-4">
-                <PrimaryButton
-                  class="text-red-600"
+                <Delete
+                  class="text-red-600 hover:text-red-800 hover:cursor-pointer"
                   @click="deleteUser(user.id)"
-                >
-                  Deletar
-                </PrimaryButton>
+                />
               </td>
             </tr>
           </tbody>
