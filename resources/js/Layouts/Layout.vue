@@ -73,6 +73,13 @@ const logout = () => {
                 >
                   Chamados
                 </NavLink>
+
+                <NavLink
+                  v-if="$page.props.auth.user && $page.props.auth.user.role == 'ADMIN'"
+                  :href="route('admin.user')"
+                >
+                  Usuários
+                </NavLink>
               </div>
 
               <template v-if="!$page.props.auth.user">

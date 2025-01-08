@@ -3,6 +3,8 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\OrganizationMemberOnly;
 use App\Http\Middleware\ShareInertiaDataCustom;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,15 @@ Route::middleware([
             Route::post('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
             Route::delete('/post/destroy/{id}', [PostController::class, 'destroy'])->name('post.destroy');
         });
+    });
+
+    Route::middleware(AdminMiddleware::class)->group(function() {
+        Route::get('/admin/user', [AdminController::class, 'index'])->name('admin.user');
+        Route::get('/admin/user/create', [AdminController::class, 'create'])->name('admin.create');
+        Route::post('/admin/user/store', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('/admin/user/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/admin/user/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/admin/user/destroy/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
     });
 
     Route::post('/send/message', [ChatController::class, 'send'])->name('send.message');
