@@ -68,17 +68,23 @@ const logout = () => {
                 <NavLink :href="route('post.index')"> Postagens </NavLink>
 
                 <NavLink
-                  v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
+                  v-if="
+                    $page.props.auth.user &&
+                    $page.props.auth.user.role != 'VITIMA'
+                  "
                   :href="route('chats')"
                 >
                   Chamados
                 </NavLink>
 
                 <NavLink
-                  v-if="$page.props.auth.user && $page.props.auth.user.role == 'ADMIN'"
+                  v-if="
+                    $page.props.auth.user &&
+                    $page.props.auth.user.role == 'ADMIN'
+                  "
                   :href="route('admin.user')"
                 >
-                  Usuários
+                  Admin
                 </NavLink>
               </div>
 
@@ -315,10 +321,21 @@ const logout = () => {
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              v-if="$page.props.auth.user && $page.props.auth.user.role != 'VITIMA'"
+              v-if="
+                $page.props.auth.user && $page.props.auth.user.role != 'VITIMA'
+              "
               :href="route('chats')"
             >
               Chamados
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              v-if="
+                $page.props.auth.user && $page.props.auth.user.role == 'ADMIN'
+              "
+              :href="route('admin.user')"
+            >
+              Admin
             </ResponsiveNavLink>
           </div>
 

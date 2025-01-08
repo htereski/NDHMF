@@ -25,6 +25,12 @@ function deletePost() {
     :isAuthenticated="$page.props.auth.user"
     :user="$page.props.auth.user"
   >
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ post.titulo }}
+      </h2>
+    </template>
+
     <div class="container mx-auto max-w-4xl mt-8">
       <Link :href="route('post.index')">
         <SecondaryButton class="mb-4">Voltar</SecondaryButton>

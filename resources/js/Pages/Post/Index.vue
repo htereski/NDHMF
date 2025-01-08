@@ -3,6 +3,7 @@ import Layout from '@/Layouts/Layout.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Link } from '@inertiajs/vue3'
 import Pagination from '@/Components/Pagination.vue'
+import FileDocumentPlusOutline from 'vue-material-design-icons/FileDocumentPlusOutline.vue'
 
 const props = defineProps({
   paginate: Object,
@@ -22,18 +23,22 @@ const props = defineProps({
       </h2>
     </template>
 
-    <div
-      class="2xl:w-[1200px] 2xl:mx-auto bg-gray-200 shadow-md p-4 sm:p-6 place-items-center mb-10"
-    >
-      <template v-if="$page.props.auth.user">
+    <template v-if="$page.props.auth.user">
+      <div class="2xl:w-[1200px] 2xl:mx-auto flex justify-end mt-8">
         <Link
           v-if="$page.props.auth.user.role != 'VITIMA'"
           :href="route('post.create')"
         >
-          <PrimaryButton class="mb-4">Criar postagem</PrimaryButton>
+          <PrimaryButton class="mb-4"
+            ><FileDocumentPlusOutline
+          /></PrimaryButton>
         </Link>
-      </template>
+      </div>
+    </template>
 
+    <div
+      class="2xl:w-[1200px] 2xl:mx-auto bg-white sm:rounded-lg shadow-md p-4 sm:p-6 place-items-center mt-4 mb-10"
+    >
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
       >

@@ -33,6 +33,12 @@ function submitForm() {
     :isAuthenticated="true"
     :user="props.user"
   >
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        Editar postagem
+      </h2>
+    </template>
+
     <div class="container mx-auto max-w-4xl mt-8">
       <Link class="mx-auto" href="#" onclick="history.back()">
         <SecondaryButton class="bg-transparent"> Voltar </SecondaryButton>
@@ -42,7 +48,6 @@ function submitForm() {
     <div
       class="container mx-auto max-w-4xl my-8 bg-white shadow-lg rounded-lg p-6"
     >
-      <h2 class="text-2xl text-black mb-5">Editar postagem</h2>
       <form @submit.prevent="submitForm">
         <div
           class="relative mx-auto max-w-[300px] sm:max-w-[400px] aspect-square overflow-hidden border border-slate-300"
@@ -86,7 +91,7 @@ function submitForm() {
         <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
 
         <div class="flex my-5">
-          <PrimaryButton class="mx-auto"> Editar postagem </PrimaryButton>
+          <PrimaryButton class="mx-auto"> Alterar </PrimaryButton>
         </div>
       </form>
     </div>
