@@ -1,4 +1,3 @@
-name: NDHMF
 services:
     laravel.test:
         container_name: laravel-NDHMF
@@ -24,68 +23,49 @@ services:
         networks:
             - sail
         depends_on:
-            - pgsql
-            - redis
-    pgsql:
-        container_name: pgsql-NDHMF
-        image: 'postgres:17'
+            - mysql
+    mysql:
+        container_name: mysql-NDHMF
+        image: 'mysql:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
+            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            PGPASSWORD: '${DB_PASSWORD:-secret}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-password}'
+            MYSQL_DATABASE: '${DB_DATABASE:-ndhmf}'
+            MYSQL_USER: '${DB_USERNAME:-sail}'
+            MYSQL_PASSWORD: '${DB_PASSWORD:-password}'
         volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+            - 'sail-mysql:/var/lib/mysql'
         networks:
             - sail
         healthcheck:
             test:
                 - CMD
-                - pg_isready
-                - '-q'
-                - '-d'
-                - '${DB_DATABASE}'
-                - '-U'
-                - '${DB_USERNAME}'
-            retries: 3
-            timeout: 5s
-    redis:
-        container_name: redis-NDHMF
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
-        volumes:
-            - 'sail-redis:/data'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - redis-cli
+                - mysqladmin
                 - ping
+                - '-h'
+                - 'localhost'
             retries: 3
             timeout: 5s
-    pgadmin:
-        container_name: pgadmin-NDHMF
-        image: dpage/pgadmin4
+    phpmyadmin:
+        container_name: phpmyadmin-NDHMF
+        image: phpmyadmin/phpmyadmin:latest
         restart: always
         environment:
-            PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
-            PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
         ports:
-            - '16543:80'
+            - '8080:80'
         depends_on:
-            - pgsql
+            - mysql
         networks:
             - sail
 networks:
     sail:
         driver: bridge
 volumes:
-    sail-pgsql:
+    sail-mysql:
         driver: local
     sail-redis:
         driver: local
