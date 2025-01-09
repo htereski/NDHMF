@@ -16,9 +16,13 @@ const props = defineProps({
 
 const openChatId = ref(null)
 const currentChat = ref('')
+
 const chatMessages = ref({})
+const messageDiv = ref('')
+
 const groupedMessages = ref({})
-const inputMessages = ref({})
+const messageModal = ref('')
+
 const loading = ref(false)
 
 const search_id = ref('')
@@ -141,9 +145,7 @@ const searchChat = async () => {
         chatMessages.value[search_id.value]
       )
 
-      if (!inputMessages.value[search_id.value]) {
-        inputMessages.value[search_id.value] = ''
-      }
+      messageModal.value = ''
 
       nextTick(() => {
         scrollToBottom('modal')
@@ -158,11 +160,12 @@ const searchChat = async () => {
 }
 
 const sendMessage = async (option = 'default') => {
-  const content = inputMessages.value[currentChat.value]?.trim()
+  const content1 = messageDiv.value?.trim()
+  const content2 = messageModal.value?.trim()
 
-  if (!content) return
+  if (!content1 && !content2) return
 
-  form.content = content
+  content1 ? (form.content = content1) : (form.content = content2)
 
   try {
     await axios.post(route('send.message'), {
@@ -170,10 +173,14 @@ const sendMessage = async (option = 'default') => {
       content: form.content,
     })
 
-    if (option == 'default') {
-      inputMessages.value[currentChat.value] = ''
-    } else {
-      inputMessages.value[currentChat.value] = ''
+    if (content1) {
+      messageDiv.value = ''
+    }
+    if (content2) {
+      messageModal.value = ''
+    }
+
+    if (!option == 'default') {
       nextTick(() => {
         scrollToBottom('modal')
       })
@@ -311,7 +318,7 @@ watch(currentChat, newChatId => {
             class="flex gap-2 mt-4"
           >
             <input
-              v-model="inputMessages[chat.id]"
+              v-model="messageDiv"
               type="text"
               placeholder="Digite sua mensagem..."
               class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -393,7 +400,7 @@ watch(currentChat, newChatId => {
         <div v-if="!loading" class="mt-4 flex-shrink-0">
           <form @submit.prevent="sendMessage" class="flex gap-2">
             <input
-              v-model="inputMessages[search_id]"
+              v-model="messageModal"
               type="text"
               placeholder="Digite sua mensagem..."
               class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
