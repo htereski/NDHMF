@@ -14,7 +14,7 @@ const props = defineProps({
   chats: Array,
 })
 
-const openChatIds = ref([])
+const openChatId = ref(null)
 const currentChat = ref('')
 const chatMessages = ref({})
 const groupedMessages = ref({})
@@ -89,16 +89,13 @@ const scrollToBottom = (option = 'default') => {
 }
 
 const toggleChat = async chatId => {
-  const isChatOpen = openChatIds.value.includes(chatId)
-  currentChat.value = chatId
-
-  if (isChatOpen) {
-    openChatIds.value = openChatIds.value.filter(id => id !== chatId)
+  if (openChatId.value === chatId) {
+    openChatId.value = null
     return
-  } else {
-    openChatIds.value = [...openChatIds.value, chatId]
   }
 
+  openChatId.value = chatId
+  currentChat.value = chatId
   loading.value = true
 
   try {
@@ -247,7 +244,7 @@ watch(currentChat, newChatId => {
           </div>
 
           <div
-            v-if="openChatIds.includes(chat.id)"
+            v-if="openChatId === chat.id"
             class="mt-4 overflow-y-auto max-h-96"
             :id="'chat-' + chat.id"
           >
@@ -309,7 +306,7 @@ watch(currentChat, newChatId => {
           </div>
 
           <form
-            v-if="openChatIds.includes(chat.id)"
+            v-if="openChatId === chat.id"
             @submit.prevent="sendMessage"
             class="flex gap-2 mt-4"
           >
