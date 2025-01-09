@@ -97,10 +97,10 @@ const toggleChat = () => {
 
 <template>
   <div
-    class="fixed bottom-0 right-0 w-full md:w-1/3 lg:w-1/4 bg-white shadow-lg border border-gray-300 rounded-t-lg z-50"
+    class="fixed bottom-0 right-0 w-full md:w-1/3 lg:w-1/4 bg-white border border-blue-500 rounded-t-lg z-50"
   >
     <div
-      class="bg-blue-500 text-white p-3 flex justify-between items-center cursor-pointer"
+      class="bg-blue-500 text-white p-3 flex justify-between items-center cursor-pointer rounded-t-lg"
       @click="toggleChat"
     >
       <span>Chat</span>
@@ -110,7 +110,7 @@ const toggleChat = () => {
     <div
       v-if="isChatOpen"
       ref="messagesContainer"
-      class="p-4 max-h-96 overflow-y-auto bg-gray-100 rounded-lg shadow-md"
+      class="p-4 max-h-96 overflow-y-auto bg-gray-100 shadow-md"
     >
       <div v-for="(item, index) in groupedMessages" :key="index" class="mb-4">
         <div v-if="item.type === 'date'" class="text-center text-gray-500 my-2">
