@@ -7,6 +7,7 @@ import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import Pagination from '@/Components/Pagination.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
+import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const props = defineProps({
   paginate: Object,
@@ -212,12 +213,7 @@ watch(currentChat, newChatId => {
             @keyup.enter="searchChat"
           />
           <InputError :message="form.errors.id" class="mt-2" />
-          <button
-            @click="searchChat"
-            class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
-          >
-            Buscar
-          </button>
+          <PrimaryButton @click="searchChat"> Buscar </PrimaryButton>
         </div>
       </div>
 
