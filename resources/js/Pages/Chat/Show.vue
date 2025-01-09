@@ -102,7 +102,7 @@ const toggleChat = async chatId => {
   loading.value = true
 
   try {
-    const response = await axios.get(`/chats/messages/${chatId}`)
+    const response = await axios.get(route('chat.messages', chatId))
     chatMessages.value[chatId] = response.data.messages
     groupedMessages.value[chatId] = groupMessagesByDate(
       chatMessages.value[chatId]
@@ -160,26 +160,30 @@ const searchChat = async () => {
   }
 }
 
-const sendMessage = (option = 'default') => {
+const sendMessage = async (option = 'default') => {
   const content = inputMessages.value[currentChat.value]?.trim()
 
   if (!content) return
 
   form.content = content
 
-  form.post(route('send.message'), {
-    preserveScroll: true,
-    onSuccess: () => {
-      if (option == 'default') {
-        inputMessages.value[currentChat.value] = ''
-      } else {
-        inputMessages.value[currentChat.value] = ''
-        nextTick(() => {
-          scrollToBottom('modal')
-        })
-      }
-    },
-  })
+  try {
+    await axios.post(route('send.message'), {
+      chat_id: form.chat_id,
+      content: form.content,
+    })
+
+    if (option == 'default') {
+      input.value[currentChat.value] = ''
+    } else {
+      input.value[currentChat.value] = ''
+      nextTick(() => {
+        scrollToBottom('modal')
+      })
+    }
+  } catch (error) {
+    console.error('Erro ao enviar mensagem:', error)
+  }
 }
 
 watch(currentChat, newChatId => {
@@ -201,7 +205,10 @@ watch(currentChat, newChatId => {
     </template>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-      <div v-if="chats.length > 0" class="col-span-6 sm:col-span-4 mb-10">
+      <div
+        v-if="chats && chats.length > 0"
+        class="col-span-6 sm:col-span-4 mb-10"
+      >
         <InputLabel for="id" value="ID" />
         <div class="flex gap-2">
           <TextInput
@@ -217,7 +224,7 @@ watch(currentChat, newChatId => {
         </div>
       </div>
 
-      <div v-if="chats.length === 0" class="text-center text-gray-500">
+      <div v-if="chats && chats.length === 0" class="text-center text-gray-500">
         <p>Nenhum chat encontrado.</p>
       </div>
 

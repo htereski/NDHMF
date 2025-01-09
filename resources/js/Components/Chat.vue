@@ -70,19 +70,22 @@ watch(chatMessages, () => {
   scrollToBottom()
 })
 
-const sendMessage = () => {
+const sendMessage = async () => {
   const content = inputMessage.value.trim()
 
   if (!content) return
 
   form.content = content
 
-  form.post(route('send.message'), {
-    preserveScroll: true,
-    onSuccess: () => {
-      inputMessage.value = ''
-    },
-  })
+  try {
+    await axios.post(route('send.message'), {
+      chat_id: form.chat_id,
+      content: form.content,
+    })
+    inputMessage.value = ''
+  } catch (error) {
+    console.error('Não foi possivel enviar a mensagem', error)
+  }
 }
 
 const isChatOpen = ref(false)
