@@ -174,9 +174,9 @@ const sendMessage = async (option = 'default') => {
     })
 
     if (option == 'default') {
-      input.value[currentChat.value] = ''
+      inputMessages.value[currentChat.value] = ''
     } else {
-      input.value[currentChat.value] = ''
+      inputMessages.value[currentChat.value] = ''
       nextTick(() => {
         scrollToBottom('modal')
       })
