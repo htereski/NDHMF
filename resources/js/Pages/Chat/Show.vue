@@ -6,6 +6,7 @@ import formatDate from '@/Utils/FormatDate.js'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import Pagination from '@/Components/Pagination.vue'
+import SecondaryButton from '@/Components/SecondaryButton.vue'
 
 const props = defineProps({
   paginate: Object,
@@ -315,11 +316,7 @@ watch(currentChat, newChatId => {
               placeholder="Digite sua mensagem..."
               class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
-              class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
-            >
-              Enviar
-            </button>
+            <SecondaryButton type="submit">Enviar</SecondaryButton>
           </form>
         </div>
       </div>
@@ -401,11 +398,7 @@ watch(currentChat, newChatId => {
               placeholder="Digite sua mensagem..."
               class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
-              class="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition"
-            >
-              Enviar
-            </button>
+            <SecondaryButton type="submit">Enviar</SecondaryButton>
           </form>
         </div>
       </div>

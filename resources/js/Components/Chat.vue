@@ -2,6 +2,7 @@
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import formatDate from '@/Utils/FormatDate.js'
+import SecondaryButton from './SecondaryButton.vue'
 
 const props = defineProps({
   chat: Object,
@@ -149,11 +150,7 @@ const toggleChat = () => {
           placeholder="Digite sua mensagem..."
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-        >
-          Enviar
-        </button>
+        <SecondaryButton type="submit">Enviar</SecondaryButton>
       </form>
     </div>
   </div>
