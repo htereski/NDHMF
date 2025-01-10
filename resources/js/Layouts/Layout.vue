@@ -8,6 +8,7 @@ import DropdownLink from '@/Components/DropdownLink.vue'
 import NavLink from '@/Components/NavLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import { buildFullUrl } from '@/Utils/Url'
+import ToastList from '@/Components/ToastList.vue';
 
 defineProps({
   title: String,
@@ -401,6 +402,9 @@ const logout = () => {
       <main>
         <slot />
       </main>
+
+      <ToastList />
+
     </div>
   </div>
 </template>
