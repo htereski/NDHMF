@@ -41,7 +41,7 @@ function deleteUser(id) {
       <div
         class="w-full relative overflow-x-auto sm:rounded-lg flex justify-end mb-8"
       >
-        <Link :href="route('admin.create')">
+        <Link :href="route('admin.create')" class="border rounded-md">
           <SecondaryButton><AccountPlus /></SecondaryButton
         ></Link>
       </div>
