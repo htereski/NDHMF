@@ -8,6 +8,7 @@ import TextInput from '@/Components/TextInput.vue'
 import Pagination from '@/Components/Pagination.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
+import toast from '@/Stores/toast'
 
 const props = defineProps({
   paginate: Object,
@@ -112,7 +113,7 @@ const toggleChat = async chatId => {
       scrollToBottom()
     })
   } catch (error) {
-    console.error('Erro ao buscar mensagens:', error)
+    addToast('Erro ao buscar mensagens', 'error')
   } finally {
     loading.value = false
   }
@@ -152,7 +153,7 @@ const searchChat = async () => {
       })
     } catch (error) {
       closeModal()
-      console.error('Erro ao buscar chat:', error)
+      addToast('Erro ao buscar chat', 'error')
     } finally {
       loading.value = false
     }
@@ -186,7 +187,7 @@ const sendMessage = async (option = 'default') => {
       })
     }
   } catch (error) {
-    console.error('Erro ao enviar mensagem:', error)
+    addToast('Erro ao enviar mensagem', 'error')
   }
 }
 
@@ -194,6 +195,10 @@ watch(currentChat, newChatId => {
   form.chat_id = newChatId
   form.content = chatMessages.value[newChatId] || ''
 })
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
+}
 </script>
 
 <template>

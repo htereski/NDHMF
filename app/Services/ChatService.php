@@ -35,9 +35,11 @@ class ChatService
 
     public function show(int $id): array
     {
-        $chat = Chat::find($id);
+        $chat = Chat::with(['messages.user'])
+            ->whereHas('messages')
+            ->find($id);
 
-        if (!$chat) {
+        if (!isset($chat)) {
             throw new ChatNotFoundException();
         }
 
