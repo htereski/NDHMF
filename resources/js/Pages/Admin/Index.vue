@@ -1,28 +1,37 @@
 <script setup>
 import Layout from '@/Layouts/Layout.vue'
 import Pagination from '@/Components/Pagination.vue'
-import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
+import toast from '@/Stores/toast'
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
   users: Array,
 })
 
-const form = useForm({})
-
-function deleteUser(id) {
+async function deleteUser(id) {
   if (confirm('Tem certeza que deseja excluir este usuário?')) {
-    form.delete(route('admin.destroy', id), {
-      onSuccess: () => {
-        setTimeout(() => {
-          window.location.href = route('admin.user')
-        }, 1000)
-      },
-    })
+    try {
+      await axios.delete(route('admin.destroy', id))
+
+      const userIndex = props.users.users.data.findIndex(user => user.id === id)
+
+      if (userIndex !== -1) {
+        props.users.users.data.splice(userIndex, 1)
+      }
+
+      addToast('Usuário excluído com sucesso.', 'success')
+    } catch (error) {
+      addToast('Erro ao excluir o usuário.', 'error')
+    }
   }
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 
@@ -37,6 +46,7 @@ function deleteUser(id) {
         Colaboradores do projeto
       </h2>
     </template>
+
     <div class="container flex flex-col mx-auto items-center mt-8 mb-10">
       <div
         class="w-full relative overflow-x-auto sm:rounded-lg flex justify-end mb-8"
