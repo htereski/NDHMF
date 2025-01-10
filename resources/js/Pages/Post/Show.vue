@@ -5,6 +5,7 @@ import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
+import toast from '@/Stores/toast';
 
 const props = defineProps({
   post: Object,
@@ -14,8 +15,19 @@ const form = useForm({})
 
 function deletePost() {
   if (confirm('Tem certeza que deseja excluir este post?')) {
-    form.delete(route('post.destroy', props.post.id))
+    form.delete(route('post.destroy', props.post.id), {
+      onSuccess: () => {
+        addToast('Postagem excluida com sucesso!', 'success')
+      },
+      onError: () => {
+        addToast('Erro ao excluir postagem.', 'error')
+      },
+    })
   }
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Services\PostService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -64,12 +65,10 @@ class PostController extends Controller
         ]);
     }
 
-    public function destroy(string $id): Response
+    public function destroy(string $id): RedirectResponse
     {
-        $data = $this->postService->destroy($id);
+        $this->postService->destroy($id);
 
-        return Inertia::render('Post/Index', [
-            'posts' => $data['posts']
-        ]);
+        return response()->redirectToRoute('post.index');
     }
 }

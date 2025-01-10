@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Editor from '@/Components/Editor.vue'
 import { Link, useForm } from '@inertiajs/vue3'
+import toast from '@/Stores/toast'
 
 const props = defineProps({
   user: Object,
@@ -23,7 +24,18 @@ function change(event) {
 }
 
 function submitForm() {
-  form.post(route('post.update', props.post.id))
+  form.post(route('post.update', props.post.id), {
+    onSuccess: () => {
+      addToast('Postagem editada com sucesso!', 'success')
+    },
+    onError: () => {
+      addToast('Erro ao editar postagem.', 'error')
+    },
+  })
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 

@@ -5,6 +5,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Editor from '@/Components/Editor.vue'
 import { useForm } from '@inertiajs/vue3'
 import { Link } from '@inertiajs/vue3'
+import toast from '@/Stores/toast'
 
 const form = useForm({
   titulo: null,
@@ -19,7 +20,18 @@ function change(event) {
 }
 
 function submitForm() {
-  form.post(route('post.store'))
+  form.post(route('post.store'), {
+    onSuccess: () => {
+      addToast('Postagem criada com sucesso!', 'success')
+    },
+    onError: () => {
+      addToast('Erro ao criar postagem.', 'error')
+    },
+  })
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 

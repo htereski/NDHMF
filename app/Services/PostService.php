@@ -117,7 +117,7 @@ class PostService
         return array('post' => $post->toArray(request()));
     }
 
-    public function destroy(string $id): array
+    public function destroy(string $id): void
     {
         $post = Post::findOrFail($id);
 
@@ -129,14 +129,6 @@ class PostService
 
         $post->delete();
 
-        $posts = Post::latest()->get();
-
-        foreach ($posts as $singlePost) {
-            $singlePost->imagem = asset($singlePost->imagem);
-        }
-
-        $posts = SimplePostResource::collection($posts);
-
-        return array('posts' => $posts->toArray(request()));
+        return;
     }
 }
