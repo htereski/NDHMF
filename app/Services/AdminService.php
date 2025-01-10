@@ -16,7 +16,7 @@ class AdminService
         return array('users' => $users);
     }
 
-    public function store(Request $request): array
+    public function store(Request $request): void
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -32,7 +32,7 @@ class AdminService
             'role' => $request->role,
         ]);
 
-        return array('message' => 'Usuário cadastrado com sucesso!');
+        return;
     }
 
     public function edit(User $user): array
@@ -40,7 +40,7 @@ class AdminService
         return array('user' => User::find($user)->first());
     }
 
-    public function update(Request $request, string $id): array
+    public function update(Request $request, string $id): void
     {
         $user = User::find($id);
 
@@ -56,7 +56,7 @@ class AdminService
 
         $user->update();
 
-        return array('message' => 'Usuário atualizado com sucesso!');
+        return;
     }
 
     public function destroy(string $id): array
@@ -66,7 +66,7 @@ class AdminService
         $user->delete();
 
         $users = User::whereIn('role', ['ADMIN', 'MARIELLE'])->paginate(10);
-        
+
         return array('users' => $users);
     }
 }

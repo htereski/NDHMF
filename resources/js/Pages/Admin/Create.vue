@@ -1,5 +1,4 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue'
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
@@ -7,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
 import Layout from '@/Layouts/Layout.vue'
 import { Link, useForm } from '@inertiajs/vue3'
+import toast from '@/Stores/toast'
 
 const form = useForm({
   name: '',
@@ -18,13 +18,17 @@ const form = useForm({
 
 const submit = () => {
   form.post(route('admin.store'), {
-    onSuccess: () => {
-      form.reset()
-      setTimeout(() => {
-        window.location.href = route('admin.user')
-      }, 1000)
+    onSuccess: response => {
+      addToast('Usuário cadastrado com sucesso!', 'success')
+    },
+    onError: error => {
+      addToast('Não foi possivel cadastrar o usuário', 'error')
     },
   })
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 

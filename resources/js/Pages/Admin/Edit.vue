@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
 import Layout from '@/Layouts/Layout.vue'
 import { Link, useForm } from '@inertiajs/vue3'
+import toast from '@/Stores/toast'
 
 const props = defineProps({
   user: Object,
@@ -20,11 +21,16 @@ const form = useForm({
 const submit = () => {
   form.put(route('admin.update', props.user.id), {
     onSuccess: () => {
-      setTimeout(() => {
-        window.location.href = route('admin.user')
-      }, 1000)
+      addToast('Usuário editado com sucesso!', 'success')
+    },
+    onError: () => {
+      addToast('Não foi possivel editar o usuário', 'error')
     },
   })
+}
+
+function addToast(message, type) {
+  toast.add({ message: message, type: type })
 }
 </script>
 

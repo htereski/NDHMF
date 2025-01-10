@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\AdminService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,7 +16,7 @@ class AdminController extends Controller
     public function index(): Response
     {
         $data = $this->adminService->index();
-        
+
         return Inertia::render('Admin/Index', ['users' => $data]);
     }
 
@@ -24,11 +25,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/Create', []);
     }
 
-    public function store(Request $request): Response
+    public function store(Request $request): RedirectResponse
     {
-        $data = $this->adminService->store($request);
+        $this->adminService->store($request);
 
-        return Inertia::render('Admin/Create', ['message' => $data['message']]);
+        return response()->redirectToRoute('admin.user');
     }
 
     public function edit(User $user): Response
@@ -38,11 +39,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/Edit', ['user' => $data['user']]);
     }
 
-    public function update(Request $request, string $id): Response
+    public function update(Request $request, string $id): RedirectResponse
     {
-        $data = $this->adminService->update($request, $id);
+        $this->adminService->update($request, $id);
 
-        return Inertia::render('Admin/Edit', ['message' => $data['message']]);
+        return response()->redirectToRoute('admin.user');
     }
 
     public function destroy(string $id): Response
