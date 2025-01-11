@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import toast from '@/Stores/toast'
+import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const props = defineProps({
   post: Object,
@@ -14,16 +15,19 @@ const props = defineProps({
 const form = useForm({})
 
 function deletePost() {
-  if (confirm('Tem certeza que deseja excluir este post?')) {
-    form.delete(route('post.destroy', props.post.id), {
-      onSuccess: () => {
-        addToast('Postagem excluida com sucesso!', 'success')
-      },
-      onError: () => {
-        addToast('Erro ao excluir postagem.', 'error')
-      },
-    })
-  }
+  form.delete(route('post.destroy', props.post.id), {
+    onSuccess: () => {
+      addToast('Postagem excluida com sucesso!', 'success')
+    },
+    onError: () => {
+      addToast('Erro ao excluir postagem.', 'error')
+    },
+  })
+}
+
+function openModal() {
+  const modal = document.getElementById('my_modal_1')
+  modal.showModal()
 }
 
 function addToast(message, type) {
@@ -63,7 +67,7 @@ function addToast(message, type) {
           >
             <Pencil />
           </Link>
-          <button class="text-red-600 hover:text-red-800" @click="deletePost">
+          <button class="text-red-600 hover:text-red-800" @click="openModal">
             <Delete />
           </button>
         </div>
@@ -100,5 +104,30 @@ function addToast(message, type) {
         ></div>
       </div>
     </div>
+
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box min-h-96 bg-slate-50 flex flex-col">
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
+        <div
+          class="flex flex-col grow items-center justify-center text-justify"
+        >
+          <p class="text-black text-xl">
+            Deseja mesmo apagar a postagem {{ post.titulo }}?
+          </p>
+          <div class="flex gap-4 mt-8">
+            <SecondaryButton @click="deletePost">Sim</SecondaryButton>
+            <form method="dialog">
+              <PrimaryButton type="submit">Não</PrimaryButton>
+            </form>
+          </div>
+        </div>
+      </div>
+    </dialog>
   </Layout>
 </template>

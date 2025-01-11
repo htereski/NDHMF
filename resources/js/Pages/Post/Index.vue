@@ -1,6 +1,5 @@
 <script setup>
 import Layout from '@/Layouts/Layout.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Link } from '@inertiajs/vue3'
 import Pagination from '@/Components/Pagination.vue'
 import FileDocumentPlusOutline from 'vue-material-design-icons/FileDocumentPlusOutline.vue'
