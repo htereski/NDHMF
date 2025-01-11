@@ -45,7 +45,7 @@ const props = defineProps({
         <template v-for="post in posts" :key="post.id">
           <Link :href="route('post.show', post)">
             <div
-              class="card w-full max-w-xs h-96 shadow-xl rounded-xl bg-gradient-to-br from-green-400 to-green-600 transition-transform transform hover:scale-105 hover:shadow-2xl"
+              class="card w-full max-w-xs h-96 shadow-xl rounded-xl bg-green-300 transition-transform transform hover:scale-105 hover:shadow-2xl"
             >
               <figure class="h-2/3 p-2">
                 <span
