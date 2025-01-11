@@ -18,6 +18,7 @@ import RedoIcon from 'vue-material-design-icons/Redo.vue'
 
 const props = defineProps({
   modelValue: String,
+  styles: String,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -30,8 +31,7 @@ const editor = useEditor({
   extensions: [StarterKit, Underline],
   editorProps: {
     attributes: {
-      class:
-        'border border-gray-400 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto outline-none prose max-w-none text-black',
+      class: `border border-gray-400 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto outline-none prose max-w-none text-black`,
     },
   },
 })
@@ -144,6 +144,10 @@ const editor = useEditor({
       </button>
     </section>
 
-    <EditorContent class="text-black marker:text-black" :editor="editor" />
+    <EditorContent
+      class="text-black marker:text-black"
+      :class="styles"
+      :editor="editor"
+    />
   </div>
 </template>

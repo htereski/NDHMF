@@ -52,7 +52,7 @@ function addToast(message, type) {
     </template>
 
     <div class="container mx-auto max-w-4xl mt-8">
-      <Link class="mx-auto" href="#" onclick="history.back()">
+      <Link class="mx-auto" :href="route('post.show', props.post.id)">
         <SecondaryButton class="bg-transparent"> Voltar </SecondaryButton>
       </Link>
     </div>
@@ -99,7 +99,7 @@ function addToast(message, type) {
         <p class="text-red-500 mt-2">{{ form.errors.titulo }}</p>
 
         <label class="text-black">Texto</label>
-        <Editor v-model="form.texto" v-model:resetEditor="resetEditor" />
+        <Editor v-model="form.texto" v-model:resetEditor="resetEditor" styles="custom-html-content" />
         <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
 
         <div class="flex my-5">

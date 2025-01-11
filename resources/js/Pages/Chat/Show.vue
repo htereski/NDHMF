@@ -153,7 +153,7 @@ const searchChat = async () => {
       })
     } catch (error) {
       closeModal()
-      addToast('Erro ao buscar chat', 'error')
+      addToast('Erro ao buscar chamado', 'error')
     } finally {
       loading.value = false
     }

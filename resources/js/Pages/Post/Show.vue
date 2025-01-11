@@ -5,7 +5,7 @@ import { Link, useForm } from '@inertiajs/vue3'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
-import toast from '@/Stores/toast';
+import toast from '@/Stores/toast'
 
 const props = defineProps({
   post: Object,
@@ -74,7 +74,7 @@ function addToast(message, type) {
         <div class="flex justify-center my-6">
           <img :src="post.imagem" alt="foto" />
         </div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">
+        <h2 class="text-5xl font-bold text-gray-800 mb-4 text-center">
           {{ post.titulo }}
         </h2>
 
@@ -95,7 +95,7 @@ function addToast(message, type) {
         </template>
 
         <div
-          class="my-8 prose-lg text-justify text-black w-full indent-10"
+          class="my-8 prose-lg text-justify text-black w-full indent-10 custom-html-content"
           v-html="post.texto"
         ></div>
       </div>

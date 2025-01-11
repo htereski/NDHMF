@@ -95,7 +95,7 @@ function addToast(message, type) {
         <p class="text-red-500 mt-2">{{ form.errors.titulo }}</p>
 
         <label class="text-black">Texto</label>
-        <Editor v-model="form.texto" v-model:resetEditor="resetEditor" />
+        <Editor v-model="form.texto" v-model:resetEditor="resetEditor" styles="custom-html-content" />
         <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
 
         <div class="flex my-5">
