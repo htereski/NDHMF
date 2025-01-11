@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { Link } from '@inertiajs/vue3'
 import Pagination from '@/Components/Pagination.vue'
 import FileDocumentPlusOutline from 'vue-material-design-icons/FileDocumentPlusOutline.vue'
+import SecondaryButton from '@/Components/SecondaryButton.vue'
 
 const props = defineProps({
   paginate: Object,
@@ -29,9 +30,9 @@ const props = defineProps({
           v-if="$page.props.auth.user.role != 'VITIMA'"
           :href="route('post.create')"
         >
-          <PrimaryButton class="mb-4"
+          <SecondaryButton class="mb-4"
             ><FileDocumentPlusOutline
-          /></PrimaryButton>
+          /></SecondaryButton>
         </Link>
       </div>
     </template>
