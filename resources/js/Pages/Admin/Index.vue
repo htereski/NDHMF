@@ -7,27 +7,44 @@ import Delete from 'vue-material-design-icons/Delete.vue'
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import toast from '@/Stores/toast'
 import { Link } from '@inertiajs/vue3'
+import PrimaryButton from '@/Components/PrimaryButton.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   users: Array,
 })
 
-async function deleteUser(id) {
-  if (confirm('Tem certeza que deseja excluir este usuário?')) {
-    try {
-      await axios.delete(route('admin.destroy', id))
+const userToDelete = ref(0)
 
-      const userIndex = props.users.users.data.findIndex(user => user.id === id)
+async function deleteUser() {
+  try {
+    await axios.delete(route('admin.destroy', userToDelete.value))
 
-      if (userIndex !== -1) {
-        props.users.users.data.splice(userIndex, 1)
-      }
+    const userIndex = props.users.users.data.findIndex(
+      user => user.id === userToDelete.value
+    )
 
-      addToast('Usuário excluído com sucesso.', 'success')
-    } catch (error) {
-      addToast('Erro ao excluir o usuário.', 'error')
+    if (userIndex !== -1) {
+      props.users.users.data.splice(userIndex, 1)
     }
+
+    closeModal(userToDelete.value)
+
+    addToast('Usuário excluído com sucesso.', 'success')
+  } catch (error) {
+    addToast('Erro ao excluir o usuário.', 'error')
   }
+}
+
+function openModal(id) {
+  const modal = document.getElementById('my_modal_' + id)
+  modal.showModal()
+  userToDelete.value = id
+}
+
+function closeModal(id) {
+  const modal = document.getElementById('my_modal_' + id)
+  modal.close()
 }
 
 function addToast(message, type) {
@@ -86,9 +103,34 @@ function addToast(message, type) {
               <td class="px-6 py-4">
                 <Delete
                   class="text-red-600 hover:text-red-800 hover:cursor-pointer"
-                  @click="deleteUser(user.id)"
+                  @click="openModal(user.id)"
                 />
               </td>
+
+              <dialog :id="'my_modal_' + user.id" class="modal">
+                <div class="modal-box min-h-96 bg-slate-50 flex flex-col">
+                  <form method="dialog">
+                    <button
+                      class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                    >
+                      ✕
+                    </button>
+                  </form>
+                  <div
+                    class="flex flex-col grow items-center justify-center text-justify"
+                  >
+                    <p class="text-black text-xl">
+                      Deseja mesmo excluir {{ user.name }}?
+                    </p>
+                    <div class="flex gap-4 mt-8">
+                      <SecondaryButton @click="deleteUser">Sim</SecondaryButton>
+                      <form method="dialog">
+                        <PrimaryButton type="submit">Não</PrimaryButton>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </dialog>
             </tr>
           </tbody>
         </table>
