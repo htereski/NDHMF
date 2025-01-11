@@ -5,6 +5,9 @@ import SecondaryButton from '@/Components/SecondaryButton.vue'
 import Editor from '@/Components/Editor.vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import toast from '@/Stores/toast'
+import InputLabel from '@/Components/InputLabel.vue'
+import TextInput from '@/Components/TextInput.vue'
+import InputError from '@/Components/InputError.vue'
 
 const props = defineProps({
   user: Object,
@@ -62,7 +65,7 @@ function addToast(message, type) {
     >
       <form @submit.prevent="submitForm">
         <div
-          class="relative mx-auto max-w-[300px] sm:max-w-[400px] aspect-square overflow-hidden border border-slate-300"
+          class="relative mx-auto max-w-[300px] sm:max-w-[400px] aspect-square overflow-hidden border border-gray-300 rounded-md"
         >
           <label
             for="imagem"
@@ -83,24 +86,35 @@ function addToast(message, type) {
           />
 
           <img
-            class="w-full h-full object-cover border"
+            class="w-full h-full object-cover"
             :src="form.previewImg"
             alt="foto"
           />
         </div>
-        <p class="text-red-500 mt-2">{{ form.errors.imagem }}</p>
+        <InputError class="mt-2" :message="form.errors.imagem" />
 
-        <label class="text-black">Título</label>
-        <input
-          type="text"
-          class="w-full p-2 text-black"
-          v-model="form.titulo"
-        />
-        <p class="text-red-500 mt-2">{{ form.errors.titulo }}</p>
+        <div>
+          <InputLabel for="titulo" value="Título" />
+          <TextInput
+            id="name"
+            v-model="form.titulo"
+            type="text"
+            class="mt-1 block w-full"
+            required
+            autofocus
+          />
+          <InputError class="mt-2" :message="form.errors.titulo" />
+        </div>
 
-        <label class="text-black">Texto</label>
-        <Editor v-model="form.texto" v-model:resetEditor="resetEditor" styles="custom-html-content" />
-        <p class="text-red-500 mt-2">{{ form.errors.texto }}</p>
+        <div class="mt-4">
+          <InputLabel for="texto" value="Texto" />
+          <Editor
+            v-model="form.texto"
+            v-model:resetEditor="resetEditor"
+            styles="custom-html-content"
+          />
+          <InputError class="mt-2" :message="form.errors.texto" />
+        </div>
 
         <div class="flex my-5">
           <PrimaryButton class="mx-auto"> Alterar </PrimaryButton>

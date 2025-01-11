@@ -31,7 +31,7 @@ const editor = useEditor({
   extensions: [StarterKit, Underline],
   editorProps: {
     attributes: {
-      class: `border border-gray-400 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto outline-none prose max-w-none text-black`,
+      class: `border border-gray-300 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto outline-none prose max-w-none text-black rounded-b-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500`,
     },
   },
 })
@@ -41,7 +41,7 @@ const editor = useEditor({
   <div>
     <section
       v-if="editor"
-      class="buttons text-gray-700 flex items-center flex-wrap gap-x-4 border-t border-l border-r border-gray-400 p-4"
+      class="buttons text-gray-700 flex items-center flex-wrap gap-x-4 border-t border-l border-r border-gray-300 p-4 rounded-t-md mt-1"
     >
       <button
         type="button"
