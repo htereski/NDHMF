@@ -15,7 +15,12 @@ class ChatService
 
     public function getChats(): array
     {
-        $paginate = Chat::has('messages')->orderBy('unanswered', 'desc')->paginate(5);
+        $paginate = Chat::select('chats.id', 'chats.unanswered', 'chats.created_at', 'chats.updated_at')
+            ->join('messages', 'chats.id', '=', 'messages.chat_id')
+            ->groupBy('chats.id', 'chats.unanswered', 'chats.created_at', 'chats.updated_at')
+            ->orderBy('chats.unanswered', 'desc')
+            ->orderByRaw('MIN(messages.send_at) ASC')
+            ->paginate(5);
 
         return array('paginate' => $paginate, 'chats' => $paginate->items());
     }
