@@ -63,7 +63,7 @@ const props = defineProps({
                   {{ post.titulo }}
                 </h2>
                 <div
-                  class="truncate prose text-black"
+                  class="truncate prose text-black custom-post-index"
                   v-html="post.texto"
                 ></div>
               </div>
