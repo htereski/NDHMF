@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Chat;
 use App\Models\User;
 use App\Helper\UserHelper;
+use Illuminate\Database\Eloquent\Collection;
 
 class HomeService
 {
@@ -30,7 +31,7 @@ class HomeService
         return array('chat' => $chat);
     }
 
-    private function createChatForUser(User $user, array $usersMembers): Chat
+    private function createChatForUser(User $user, Collection $usersMembers): Chat
     {
         $chat = Chat::create();
         $user->chats()->attach($chat->id);
