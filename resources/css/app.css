@@ -122,3 +122,7 @@ input[type='number'] {
   font-weight: normal;
   text-decoration: none;
 }
+
+* {
+  font-family: 'Inter', sans-serif;
+}
