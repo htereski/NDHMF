@@ -1,11 +1,11 @@
 <script setup>
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 import Quiz from '@/Components/Quiz.vue'
 import Layout from '@/Layouts/Layout.vue'
 import Chat from '@/Components/Chat.vue'
 import { ref } from 'vue'
 import ScrollToTopButton from '@/Components/ScrollToTopButton.vue'
 import WhatsApp from '@/Components/WhatsApp.vue'
+import SecondaryButton from '@/Components/SecondaryButton.vue'
 
 defineProps({
   chat: Object,
@@ -36,7 +36,7 @@ const showQuiz = ref(false)
     <div
       class="w-full bg-green-400 min-h-[20vh] flex justify-center items-center"
     >
-      <p class="text-white text-xl text-center p-10 leading-relaxed">
+      <p class="text-black text-xl text-center p-10 leading-relaxed font-light">
         O NDH foi criado para responder às demandas sociais presentes em
         Paranaguá, com foco em temáticas como violência doméstica, gênero e
         direito à moradia.
@@ -143,13 +143,13 @@ const showQuiz = ref(false)
     </div>
 
     <div
-      class="w-full bg-black min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-start"
+      class="w-full bg-[#4f3130] min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-start"
     >
       <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
         <div class="flex flex-col items-center">
           <h3 class="text-white text-3xl text-center pb-5">Objetivo</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed"
+            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             O NDH orienta permanentemente pessoas e coletivos em situações de
             violação dos direitos humanos e oferece condições para orientação
@@ -162,7 +162,7 @@ const showQuiz = ref(false)
         <div class="flex flex-col items-center">
           <h3 class="text-white text-3xl text-center pb-5">Parcerias</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed"
+            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             Contamos com o apoio da Defensoria Pública da União, Defensoria do
             Estado do Paraná, e realizamos mutirões, palestras e oficinas com a
@@ -175,7 +175,7 @@ const showQuiz = ref(false)
         <div class="flex flex-col items-center">
           <h3 class="text-white text-3xl text-center pb-5">Funcionamento</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed"
+            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             Respondemos às demandas das comunidades de Paranaguá, muitas vezes
             por meio de solicitações de associações de moradores, levando apoio
@@ -187,9 +187,11 @@ const showQuiz = ref(false)
 
     <section
       id="acoes"
-      class="w-full min-h-screen bg-gradient-to-b from-green-400 to-green-500 flex flex-col items-center justify-center py-10"
+      class="w-full min-h-screen bg-[#E0BAD7] flex flex-col items-center justify-center py-10"
     >
-      <h3 class="text-5xl text-white font-semibold text-center pb-10">Ações</h3>
+      <h3 class="text-5xl text-[#5B2245] font-semibold text-center pb-10">
+        Ações
+      </h3>
 
       <ul
         class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical w-[calc(100%-10%)] lg:w-3/4"
@@ -209,7 +211,7 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-start mb-10 md:text-end text-white">
+          <div class="timeline-start mb-10 md:text-end text-[#5B2245]">
             <time class="font-mono text-2xl font-black italic"
               >Mutirões de Orientação Jurídica</time
             >
@@ -222,10 +224,10 @@ const showQuiz = ref(false)
               professoras do IFPR, que são advogadas e atuam como apoiadoras.
             </p>
           </div>
-          <hr />
+          <hr class="bg-[#5B2245]" />
         </li>
         <li>
-          <hr />
+          <hr class="bg-[#5B2245]" />
           <div class="timeline-middle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +242,7 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-end mb-10 text-white">
+          <div class="timeline-end mb-10 text-[#5B2245]">
             <time class="font-mono text-2xl font-black italic"
               >Palestras Educativas</time
             >
@@ -253,10 +255,10 @@ const showQuiz = ref(false)
               direitos.
             </p>
           </div>
-          <hr />
+          <hr class="bg-[#5B2245]" />
         </li>
         <li>
-          <hr />
+          <hr class="bg-[#5B2245]" />
           <div class="timeline-middle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +273,7 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-start mb-10 md:text-end text-white">
+          <div class="timeline-start mb-10 md:text-end text-[#5B2245]">
             <time class="font-mono text-2xl font-black italic"
               >Mini-Cursos de formação</time
             >
@@ -280,18 +282,27 @@ const showQuiz = ref(false)
               Realizados nas dependências do campus IFPR - Paranaguá-PR.
             </p>
           </div>
-          <hr />
+          <hr class="bg-[#5B2245]" />
         </li>
       </ul>
     </section>
 
     <section
-      class="w-full flex flex-col items-center justify-center gap-10 py-10"
+      class="w-full flex flex-col items-center justify-center gap-10 pb-10 bg-[#E0BAD7]"
     >
-      <PrimaryButton @click="showQuiz = !showQuiz">
-        Fazer teste de violentômetro
-      </PrimaryButton>
-      <Quiz v-if="showQuiz"></Quiz>
+      <SecondaryButton @click="showQuiz = !showQuiz" class="text-[#5B2245] border-[#5B2245] hover:bg-[#5B2245]">
+        Violentômetro
+      </SecondaryButton>
+      <transition
+        enter-active-class="transition-all duration-1000 ease-out"
+        enter-from-class="opacity-0 transform -translate-y-5"
+        enter-to-class="opacity-100 transform translate-y-0"
+        leave-active-class="transition-all duration-500 ease-in"
+        leave-from-class="opacity-100 transform translate-y-0"
+        leave-to-class="opacity-0 transform -translate-y-5"
+      >
+        <Quiz v-if="showQuiz"></Quiz>
+      </transition>
     </section>
 
     <Chat
