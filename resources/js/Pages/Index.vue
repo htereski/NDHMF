@@ -5,6 +5,7 @@ import Layout from '@/Layouts/Layout.vue'
 import Chat from '@/Components/Chat.vue'
 import { ref } from 'vue'
 import ScrollToTopButton from '@/Components/ScrollToTopButton.vue'
+import WhatsApp from '@/Components/WhatsApp.vue'
 
 defineProps({
   chat: Object,
@@ -298,6 +299,12 @@ const showQuiz = ref(false)
       :user="$page.props.auth.user"
       :chat="chat"
     />
+
+    <template
+      v-if="$page.props.auth.user && $page.props.auth.user.role == 'VITIMA'"
+    >
+      <WhatsApp />
+    </template>
 
     <ScrollToTopButton />
   </Layout>
