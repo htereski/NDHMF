@@ -9,6 +9,7 @@ import NavLink from '@/Components/NavLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import { buildFullUrl } from '@/Utils/Url'
 import ToastList from '@/Components/ToastList.vue';
+import Footer from '@/Components/Footer.vue';
 
 defineProps({
   title: String,
@@ -407,4 +408,5 @@ const logout = () => {
 
     </div>
   </div>
+  <Footer />
 </template>
