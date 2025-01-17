@@ -336,7 +336,7 @@ const showQuiz = ref(false)
               title: 'UPA',
               subtitle: 'Unidade de Pronto Atendimento',
               address:
-                'Av. Roque Vernalha - Estradinha, Paranaguá - PR, 83206-250 (aberto 24hrs)',
+                'Av. Roque Vernalha - Estradinha, Paranaguá - PR, 83206-250',
             },
             {
               title: 'HRL',
