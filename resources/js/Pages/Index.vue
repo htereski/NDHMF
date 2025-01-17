@@ -334,6 +334,7 @@ const showQuiz = ref(false)
           :items="[
             {
               title: 'UPA',
+              subtitle: 'Unidade de Pronto Atendimento',
               address:
                 'Av. Roque Vernalha - Estradinha, Paranaguá - PR, 83206-250 (aberto 24hrs)',
             },
@@ -352,11 +353,13 @@ const showQuiz = ref(false)
           :items="[
             {
               title: 'PM',
+              subtitle: 'Polícia Militar',
               address:
                 'Rua Professor Cleto, 1740, Bairro Industrial, Paranaguá-PR, 83203-070',
             },
             {
               title: 'GCM',
+              subtitle: 'Guarda Municipal',
               address:
                 'Rua Tocantins, nº 206 - Bairro: Padre Jackson, Paranaguá, 83.221-450',
             },
