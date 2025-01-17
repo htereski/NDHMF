@@ -365,12 +365,13 @@ const showQuiz = ref(false)
 
         <Information
           description="Se estiver em risco de voltar para casa, pode solicitar acolhimento
-            na Casa da Mulher Parnanguara."
+            na CMP."
           :items="[
             {
               title: 'CMP',
+              subtitle: 'Casa da Mulher Parnanguara',
               address:
-                'A estrutura da Casa da Mulher Parnanguara poderá incluir serviços das diferentes áreas envolvidas no atendimento, como Acolhimento e Triagem; Apoio Psicossocial; Delegacia Especializada; Juizado Especializado em Violência Doméstica e Familiar contra as Mulheres; Promotoria Especializada; Defensoria Pública; Serviço de Promoção de Autonomia Econômica; Brinquedoteca - espaço de cuidado das crianças; Alojamento de Passagem e Central de Transportes.',
+                'Av. Ford, 342-426 - Emboguaçu, Paranaguá - PR, 83209-040',
             },
           ]"
         />
