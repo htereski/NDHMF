@@ -89,7 +89,7 @@ function giveAnswer() {
 <template>
   <div class="flex flex-col w-full p-6 bg-[#abe58283] gap-10">
     <h1 class="text-2xl font-light text-center mb-4 text-black">
-      Questionário de Agressão
+      Alerta de Violência
     </h1>
     <div
       class="flex flex-col md:flex-row justify-center items-center w-full flex-wrap gap-5"
