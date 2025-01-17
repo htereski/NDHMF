@@ -6,6 +6,7 @@ import { ref } from 'vue'
 import ScrollToTopButton from '@/Components/ScrollToTopButton.vue'
 import WhatsApp from '@/Components/WhatsApp.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
+import Information from '@/Components/Information.vue'
 
 defineProps({
   chat: Object,
@@ -34,7 +35,7 @@ const showQuiz = ref(false)
     </div>
 
     <div
-      class="w-full bg-green-400 min-h-[20vh] flex justify-center items-center"
+      class="w-full bg-primary min-h-[20vh] flex justify-center items-center"
     >
       <p class="text-black text-xl text-center p-10 leading-relaxed font-light">
         O NDH foi criado para responder às demandas sociais presentes em
@@ -47,7 +48,7 @@ const showQuiz = ref(false)
       <div class="hero-overlay bg-white"></div>
       <div class="hero-content text-neutral-content text-center">
         <div class="max-w-6xl text-black">
-          <h2 class="mb-10 mt-5 text-5xl font-semibold">Sobre</h2>
+          <h2 class="mb-10 mt-5 text-5xl font-light">Sobre</h2>
 
           <p
             class="m-5 text-justify indent-12 text-xl font-light leading-relaxed"
@@ -106,7 +107,7 @@ const showQuiz = ref(false)
             mantendo vivo o legado de resistência e apoio às comunidades.
           </p>
 
-          <h2 class="pt-[50px] text-4xl font-semibold">Como funciona?</h2>
+          <h2 class="pt-[50px] text-4xl font-light">Como Funciona?</h2>
           <div class="flex flex-col 2xl:flex-row w-full pt-10 h-max">
             <div class="card grid flex-grow place-items-center h-max">
               <p
@@ -121,7 +122,7 @@ const showQuiz = ref(false)
             </div>
 
             <div
-              class="divider divider-horizontal mx-10 bg-gray-400 w-[1px] pb-10 hidden 2xl:block"
+              class="divider divider-horizontal mx-10 bg-black w-[5px] pb-10 hidden 2xl:block"
             ></div>
 
             <div
@@ -143,13 +144,13 @@ const showQuiz = ref(false)
     </div>
 
     <div
-      class="w-full bg-[#4f3130] min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-start"
+      class="w-full bg-accent min-h-[20vh] flex flex-col xl:flex-row justify-evenly items-start"
     >
       <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
-        <div class="flex flex-col items-center">
-          <h3 class="text-white text-3xl text-center pb-5">Objetivo</h3>
+        <div class="flex flex-col items-center text-black">
+          <h3 class="text-3xl text-center pb-5 font-light">Objetivo</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
+            class="text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             O NDH orienta permanentemente pessoas e coletivos em situações de
             violação dos direitos humanos e oferece condições para orientação
@@ -159,10 +160,10 @@ const showQuiz = ref(false)
       </div>
 
       <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
-        <div class="flex flex-col items-center">
-          <h3 class="text-white text-3xl text-center pb-5">Parcerias</h3>
+        <div class="flex flex-col items-center text-black">
+          <h3 class="text-3xl text-center pb-5 font-light">Parcerias</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
+            class="text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             Contamos com o apoio da Defensoria Pública da União, Defensoria do
             Estado do Paraná, e realizamos mutirões, palestras e oficinas com a
@@ -172,10 +173,10 @@ const showQuiz = ref(false)
       </div>
 
       <div class="flex flex-col text-black w-full xl:min-w-[20vw] p-5 m-auto">
-        <div class="flex flex-col items-center">
-          <h3 class="text-white text-3xl text-center pb-5">Funcionamento</h3>
+        <div class="flex flex-col items-center text-black">
+          <h3 class="text-3xl text-center pb-5 font-light">Funcionamento</h3>
           <p
-            class="text-white text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
+            class="text-xl text-center flex-grow flex items-center justify-center leading-relaxed font-light"
           >
             Respondemos às demandas das comunidades de Paranaguá, muitas vezes
             por meio de solicitações de associações de moradores, levando apoio
@@ -187,11 +188,9 @@ const showQuiz = ref(false)
 
     <section
       id="acoes"
-      class="w-full min-h-screen bg-[#E0BAD7] flex flex-col items-center justify-center py-10"
+      class="w-full min-h-screen bg-white flex flex-col items-center justify-center py-10"
     >
-      <h3 class="text-5xl text-[#5B2245] font-semibold text-center pb-10">
-        Ações
-      </h3>
+      <h3 class="text-5xl text-black text-center pb-10 font-light">Ações</h3>
 
       <ul
         class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical w-[calc(100%-10%)] lg:w-3/4"
@@ -201,7 +200,7 @@ const showQuiz = ref(false)
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
-              fill="white"
+              fill="text-primary"
               class="h-5 w-5"
             >
               <path
@@ -211,11 +210,12 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-start mb-10 md:text-end text-[#5B2245]">
-            <time class="font-mono text-2xl font-black italic"
+          <div
+            class="timeline-start rounded-xl p-10 md:text-end text-black bg-primary flex flex-col gap-3 shadow-xl font-light"
+          >
+            <time class="font-mono text-2xl italic text-center"
               >Mutirões de Orientação Jurídica</time
             >
-            <div></div>
             <p class="indent-12 text-justify text-lg leading-relaxed">
               Realização de mutirões de atendimento para orientação jurídica em
               diversos bairros/comunidades da cidade. O atendimento é realizado,
@@ -224,15 +224,15 @@ const showQuiz = ref(false)
               professoras do IFPR, que são advogadas e atuam como apoiadoras.
             </p>
           </div>
-          <hr class="bg-[#5B2245]" />
+          <hr class="bg-text" />
         </li>
         <li>
-          <hr class="bg-[#5B2245]" />
+          <hr class="bg-text" />
           <div class="timeline-middle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
-              fill="white"
+              fill="text-primary"
               class="h-5 w-5"
             >
               <path
@@ -242,11 +242,13 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-end mb-10 text-[#5B2245]">
-            <time class="font-mono text-2xl font-black italic"
+
+          <div
+            class="timeline-end rounded-xl p-10 md:text-end text-black bg-accent flex flex-col gap-3 shadow-xl font-light"
+          >
+            <time class="font-mono text-2xl italic text-center"
               >Palestras Educativas</time
             >
-            <div></div>
             <p class="indent-12 text-justify text-lg leading-relaxed">
               Realizadas em conjunto com os mutirões, proferidas por defensoras
               populares. Buscam criar espaços para partilhar experiências de
@@ -255,15 +257,15 @@ const showQuiz = ref(false)
               direitos.
             </p>
           </div>
-          <hr class="bg-[#5B2245]" />
+          <hr class="bg-text" />
         </li>
         <li>
-          <hr class="bg-[#5B2245]" />
+          <hr class="bg-text" />
           <div class="timeline-middle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
-              fill="white"
+              fill="text-primary"
               class="h-5 w-5"
             >
               <path
@@ -273,24 +275,25 @@ const showQuiz = ref(false)
               />
             </svg>
           </div>
-          <div class="timeline-start mb-10 md:text-end text-[#5B2245]">
-            <time class="font-mono text-2xl font-black italic"
-              >Mini-Cursos de formação</time
+          <div
+            class="timeline-start rounded-xl p-10 md:text-end text-black bg-primary flex flex-col gap-3 shadow-xl font-light"
+          >
+            <time class="font-mono text-2xl italic text-center"
+              >Mini-Cursos de Formação</time
             >
-            <div></div>
             <p class="indent-12 text-justify text-lg leading-relaxed">
               Realizados nas dependências do campus IFPR - Paranaguá-PR.
             </p>
           </div>
-          <hr class="bg-[#5B2245]" />
+          <hr class="bg-text" />
         </li>
       </ul>
     </section>
 
     <section
-      class="w-full flex flex-col items-center justify-center gap-10 pb-10 bg-[#E0BAD7]"
+      class="w-full flex flex-col items-center justify-center gap-10 pb-10 bg-white"
     >
-      <SecondaryButton @click="showQuiz = !showQuiz" class="text-[#5B2245] border-[#5B2245] hover:bg-[#5B2245]">
+      <SecondaryButton @click="showQuiz = !showQuiz">
         Violentômetro
       </SecondaryButton>
       <transition
@@ -316,6 +319,110 @@ const showQuiz = ref(false)
     >
       <WhatsApp />
     </template>
+
+    <section class="py-10 bg-white">
+      <h2 class="text-black text-5xl text-center pb-10 font-light">
+        Onde Buscar Ajuda?
+      </h2>
+
+      <div
+        class="grid sm:grid-cols-2 grid-cols-1 w-[75%] mx-auto gap-10 font-light"
+      >
+        <Information
+          description="Se a violência causou danos à saúde, a mulher deve procurar a UPA ou
+            o HRL - em casos de estupro também."
+          :items="[
+            {
+              title: 'UPA',
+              address:
+                'Av. Roque Vernalha - Estradinha, Paranaguá - PR, 83206-250 (aberto 24hrs)',
+            },
+            {
+              title: 'HRL',
+              subtitle: 'Hospital Regional do Litoral',
+              address:
+                'R. Pres. Getúlio Vargas, 222 - Palmital, Paranaguá - PR, 83206-020',
+            },
+          ]"
+        />
+
+        <Information
+          description="Se ela está sofrendo violência naquele momento, deve acionar a
+            Polícia Militar ou a Guarda Municipal."
+          :items="[
+            {
+              title: 'PM',
+              address:
+                'Rua Professor Cleto, 1740, Bairro Industrial, Paranaguá-PR, 83203-070',
+            },
+            {
+              title: 'GCM',
+              address:
+                'Rua Tocantins, nº 206 - Bairro: Padre Jackson, Paranaguá, 83.221-450',
+            },
+          ]"
+        />
+
+        <Information
+          description="Se estiver em risco de voltar para casa, pode solicitar acolhimento
+            na Casa da Mulher Parnanguara."
+          :items="[
+            {
+              title: 'CMP',
+              address:
+                'A estrutura da Casa da Mulher Parnanguara poderá incluir serviços das diferentes áreas envolvidas no atendimento, como Acolhimento e Triagem; Apoio Psicossocial; Delegacia Especializada; Juizado Especializado em Violência Doméstica e Familiar contra as Mulheres; Promotoria Especializada; Defensoria Pública; Serviço de Promoção de Autonomia Econômica; Brinquedoteca - espaço de cuidado das crianças; Alojamento de Passagem e Central de Transportes.',
+            },
+          ]"
+        />
+
+        <Information
+          description="Caso ela sofra violência recorrente, ou seja, a violência que já
+            ocorre a algum tempo e ela resolveu denunciar, deve procurar a
+            delegacia de polícia."
+          :items="[
+            {
+              title: 'Delegacia Policial de Paranaguá',
+              address:
+                'Rua Vieira dos Santos, 200 - Centro Histórico, Paranaguá - PR, 83203-050',
+            },
+            {
+              title: 'Delegacia Cidadã de Paranaguá',
+              address:
+                'R. Domingos Peneda, 2850 - Vila Itiberê, Paranaguá - PR, 83209-235',
+            },
+          ]"
+        />
+
+        <Information
+          description="Se ela estiver sofrendo violência mas não quiser registrar B.O.,
+            pode procurar diretamente o CREAS."
+          :items="[
+            {
+              title: 'CREAS',
+              subtitle:
+                'Centro de Referência Especializado em Assistência Social',
+              address: 'Rua Vieira dos Santos - Paranaguá, PR, 83203-050',
+            },
+          ]"
+        />
+
+        <div
+          class="bg-[#abe58283] rounded-lg flex flex-col justify-center items-center text-justify p-10 text-black shadow-xl"
+        >
+          <p class="pb-10 text-center text-lg">Canais de denúncia:</p>
+          <ul class="w-full">
+            <li>
+              <strong class="font-semibold">180</strong> - Central de
+              Atendimento à Mulher.
+            </li>
+            <li class="pt-2">
+              <strong class="font-semibold">100</strong> - É um serviço gratuito
+              de denúncias de violações de direitos humanos.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <ScrollToTopButton />
   </Layout>

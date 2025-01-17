@@ -87,8 +87,8 @@ function giveAnswer() {
 </script>
 
 <template>
-  <div class="flex flex-col w-full p-6 bg-[#E0BAD7] gap-10">
-    <h1 class="text-2xl font-semibold text-center mb-4 text-[#5B2245]">
+  <div class="flex flex-col w-full p-6 bg-[#abe58283] gap-10">
+    <h1 class="text-2xl font-light text-center mb-4 text-black">
       Questionário de Agressão
     </h1>
     <div
@@ -96,7 +96,7 @@ function giveAnswer() {
     >
       <template v-for="(question, index) in combinedQuestions" :key="index">
         <div
-          class="flex w-full md:w-fit items-center p-4 gap-2 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105 text-[#5B2245]"
+          class="flex w-full md:w-fit items-center p-4 gap-2 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105 text-black font-light"
         >
           <label class="flex-1 text-lg">{{ question }}</label>
           <input
@@ -109,14 +109,14 @@ function giveAnswer() {
       </template>
     </div>
     <PrimaryButton
-      class="bg-[#5B2245] hover:bg-[#4a1c38] active:bg-[#4a1c38] focus:bg-[#4a1c38] my-10 w-fit mx-auto"
+      class="my-10 w-fit mx-auto"
       @click="giveAnswer"
       v-if="selectedQuestions.length > 0"
     >
       Mostrar resultado
     </PrimaryButton>
     <p
-      class="text-lg text-[#5B2245] p-10 bg-white shadow-md w-fit mx-auto rounded-lg"
+      class="text-lg text-black font-light p-10 text-center bg-white shadow-md w-fit mx-auto rounded-lg"
       v-if="showAnswer && selectedQuestions.length > 0"
     >
       {{ result }}
