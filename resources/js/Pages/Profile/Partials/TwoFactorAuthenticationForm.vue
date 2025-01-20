@@ -117,7 +117,7 @@ const disableTwoFactorAuthentication = () => {
         v-if="twoFactorEnabled && !confirming"
         class="text-lg font-medium text-gray-900"
       >
-        You have enabled two factor authentication.
+        Você já habilitou a autenticação de dois fatores.
       </h3>
 
       <h3
@@ -242,7 +242,7 @@ const disableTwoFactorAuthentication = () => {
               v-if="recoveryCodes.length === 0 && !confirming"
               class="me-3"
             >
-              Show Recovery Codes
+              Mostrar os códigos de recuperação
             </SecondaryButton>
           </ConfirmsPassword>
 
@@ -262,7 +262,7 @@ const disableTwoFactorAuthentication = () => {
               :class="{ 'opacity-25': disabling }"
               :disabled="disabling"
             >
-              Disable
+              Desabilitar
             </DangerButton>
           </ConfirmsPassword>
         </div>
