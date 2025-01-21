@@ -72,7 +72,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function editedPosts()
+    public function editedPosts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class, 'post_edits')
             ->withTimestamps();

@@ -336,13 +336,13 @@ const showQuiz = ref(false)
               title: 'UPA',
               subtitle: 'Unidade de Pronto Atendimento',
               address:
-                'Av. Roque Vernalha - Estradinha, Paranaguá - PR, 83206-250',
+                'Av. Roque Vernalha, Estradinha, 75, Paranaguá-PR, 83206-250',
             },
             {
               title: 'HRL',
               subtitle: 'Hospital Regional do Litoral',
               address:
-                'R. Pres. Getúlio Vargas, 222 - Palmital, Paranaguá - PR, 83206-020',
+                'R. Pres. Getúlio Vargas, 222, Palmital, Paranaguá-PR, 83206-020',
             },
           ]"
         />
@@ -355,13 +355,13 @@ const showQuiz = ref(false)
               title: 'PM',
               subtitle: 'Polícia Militar',
               address:
-                'Rua Professor Cleto, 1740, Bairro Industrial, Paranaguá-PR, 83203-070',
+                'R. Professor Cleto, 1740, Industrial, Paranaguá-PR, 83203-070',
             },
             {
               title: 'GCM',
               subtitle: 'Guarda Municipal',
               address:
-                'Rua Tocantins, nº 206 - Bairro: Padre Jackson, Paranaguá, 83.221-450',
+                'R. Tocantins, 206, Padre Jackson, Paranaguá-PR, 83.221-450',
             },
           ]"
         />
@@ -374,7 +374,7 @@ const showQuiz = ref(false)
               title: 'CMP',
               subtitle: 'Casa da Mulher Parnanguara',
               address:
-                'Av. Ford, 342-426 - Emboguaçu, Paranaguá - PR, 83209-040',
+                'Av. Ford, 342-426, Emboguaçu, Paranaguá-PR, 83209-040',
             },
           ]"
         />
@@ -387,12 +387,12 @@ const showQuiz = ref(false)
             {
               title: 'Delegacia Policial de Paranaguá',
               address:
-                'Rua Vieira dos Santos, 200 - Centro Histórico, Paranaguá - PR, 83203-050',
+                'R. Vieira dos Santos, 200, Centro Histórico, Paranaguá-PR, 83203-050',
             },
             {
               title: 'Delegacia Cidadã de Paranaguá',
               address:
-                'R. Domingos Peneda, 2850 - Vila Itiberê, Paranaguá - PR, 83209-235',
+                'R. Domingos Peneda, 2850, Vila Itiberê, Paranaguá-PR, 83209-235',
             },
           ]"
         />
@@ -405,7 +405,7 @@ const showQuiz = ref(false)
               title: 'CREAS',
               subtitle:
                 'Centro de Referência Especializado em Assistência Social',
-              address: 'Rua Vieira dos Santos - Paranaguá, PR, 83203-050',
+              address: 'R. Vieira dos Santos, 45, Centro, Paranaguá-PR, 83203-050',
             },
           ]"
         />
@@ -420,7 +420,7 @@ const showQuiz = ref(false)
               Atendimento à Mulher.
             </li>
             <li class="pt-2">
-              <strong class="font-semibold">100</strong> - É um serviço gratuito
+              <strong class="font-semibold">100</strong> - Serviço gratuito
               de denúncias de violações de direitos humanos.
             </li>
           </ul>

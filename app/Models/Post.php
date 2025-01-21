@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Post extends Model
@@ -22,7 +23,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function editors()
+    public function editors(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'post_edits')
             ->withTimestamps();

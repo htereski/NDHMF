@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Helper\UserHelper;
 use App\Http\Resources\SimplePostResource;
 use App\Http\Resources\PostResource;
-use App\Models\PostEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -103,10 +102,7 @@ class PostService
         $post->texto = $request->texto;
         $post->save();
 
-        PostEdit::create([
-            'post_id' => $post->id,
-            'user_id' => Auth::id(),
-        ]);
+        $post->editors()->attach(Auth::id());
 
         $post->load('user');
         $post->load('editors');
