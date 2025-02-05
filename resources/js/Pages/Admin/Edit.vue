@@ -92,8 +92,8 @@ function addToast(message, type) {
             required
           >
             <option value="" disabled selected>Selecione um papel</option>
-            <option value="ADMIN">ADMIN</option>
-            <option value="MARIELLE">MARIELLE</option>
+            <option value="ADMIN">Admin</option>
+            <option value="DEFENSOR_SOCIAL">Defensor social</option>
           </select>
           <InputError class="mt-2" :message="form.errors.role" />
         </div>

@@ -12,7 +12,7 @@ class AdminService
 
     public function index(): array
     {
-        $users = User::whereIn('role', ['ADMIN', 'MARIELLE'])->paginate(10);
+        $users = User::whereIn('role', ['ADMIN', 'DEFENSOR_SOCIAL'])->paginate(10);
         return array('users' => $users);
     }
 
@@ -22,7 +22,7 @@ class AdminService
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', Password::default(), 'confirmed'],
-            'role' => ['required', 'string', 'in:ADMIN,MARIELLE'],
+            'role' => ['required', 'string', 'in:ADMIN,DEFENSOR_SOCIAL'],
         ]);
 
         User::create([
@@ -47,7 +47,7 @@ class AdminService
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'role' => ['required', 'string', 'in:ADMIN,MARIELLE'],
+            'role' => ['required', 'string', 'in:ADMIN,DEFENSOR_SOCIAL'],
         ]);
 
         $user->name = $request->name;
@@ -65,7 +65,7 @@ class AdminService
 
         $user->delete();
 
-        $users = User::whereIn('role', ['ADMIN', 'MARIELLE'])->paginate(10);
+        $users = User::whereIn('role', ['ADMIN', 'DEFENSOR_SOCIAL'])->paginate(10);
 
         return array('users' => $users);
     }

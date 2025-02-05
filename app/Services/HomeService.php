@@ -20,7 +20,7 @@ class HomeService
             if ($user->role == 'VITIMA') {
                 $chat = $user->chats->first();
 
-                $usersMembers = User::whereIn('role', ['ADMIN', 'MARIELLE'])->get();
+                $usersMembers = User::whereIn('role', ['ADMIN', 'DEFENSOR_SOCIAL'])->get();
 
                 if (!$chat) {
                     $chat = $this->createChatForUser($user, $usersMembers);

@@ -16,7 +16,7 @@ const props = defineProps({
 
 const userToDelete = ref(0)
 
-async function deleteUser() {
+async function deleteUser () {
   try {
     await axios.delete(route('admin.destroy', userToDelete.value))
 
@@ -36,19 +36,26 @@ async function deleteUser() {
   }
 }
 
-function openModal(id) {
+function openModal (id) {
   const modal = document.getElementById('my_modal_' + id)
   modal.showModal()
   userToDelete.value = id
 }
 
-function closeModal(id) {
+function closeModal (id) {
   const modal = document.getElementById('my_modal_' + id)
   modal.close()
 }
 
-function addToast(message, type) {
+function addToast (message, type) {
   toast.add({ message: message, type: type })
+}
+
+function formatRole (role) {
+  return role
+    .replace(/_/g, ' ')
+    .toLowerCase()
+    .replace(/^./, match => match.toUpperCase())
 }
 </script>
 
@@ -94,7 +101,7 @@ function addToast(message, type) {
               >
                 {{ user.name }}
               </th>
-              <td class="px-6 py-4">{{ user.role }}</td>
+              <td class="px-6 py-4">{{ formatRole(user.role) }}</td>
               <td class="px-6 py-4">
                 <Link :href="`${route('admin.edit', user.id)}`">
                   <Pencil class="text-blue-600 hover:text-blue-800" />

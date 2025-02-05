@@ -29,7 +29,7 @@ class UserFactory extends Factory
     {
         $roles = [
             'ADMIN',
-            'MARIELLE',
+            'DEFENSOR_SOCIAL',
             'VITIMA'
         ];
 
