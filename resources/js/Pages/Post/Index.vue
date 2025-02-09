@@ -59,7 +59,7 @@ const props = defineProps({
                 />
               </figure>
               <div class="card-body h-1/3">
-                <h2 class="card-title text-black mx-auto">
+                <h2 class="card-title text-black mx-auto truncate w-40">
                   {{ post.titulo }}
                 </h2>
                 <div
